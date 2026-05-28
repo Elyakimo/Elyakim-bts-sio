@@ -8,7 +8,7 @@ class Player2(pygame.sprite.Sprite):
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack= 10
+        self.attack= 100
         self.velocity = 1
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load("assets/gangnic.png")
@@ -20,6 +20,7 @@ class Player2(pygame.sprite.Sprite):
         self.gravity = 0.2
         self.velocity_y = 0
         self.jump_speed = -11
+    
     
     def lancer_projectile(self):
         #creer une instance de la classe Projectile2
@@ -46,11 +47,24 @@ class Player2(pygame.sprite.Sprite):
         if self.rect.y == 485:
             self.velocity_y = self.jump_speed
 
-    def damage(self):
+    def damage(self, amount):
         # Vérifier les collisions avec les projectiles du joueur 1
         colliding_projectiles = self.game.check_collision(self, self.game.player.all_projectiles)
         if colliding_projectiles:
             for projectile in colliding_projectiles:
                 projectile.kill()  # Supprimer le projectile
-            self.health -= 10  # Réduire la santé
-            # Ajouter d'autres effets si nécessaire (son, animation, etc.)
+            self.health -= amount  # Réduire la santé
+        # Vérifier si la santé du joueur est inférieure ou égale à 0
+        if self.health <= 0:
+            
+            # Afficher un message de fin de jeu
+            print("Game Over! Player 1 wins!")
+
+    def update_health_bar(self, surface):
+        #définir une couleur pour la barre de vie(vert clair)
+        bar_color = (0,255,0)
+        #définir la postion, la largeur et l'eppaiseur de la barre de vie
+        bar_position = [self.rect.x +70, self.rect.y +10, self.health, 5]
+
+        #dessiner la barre de vie
+        pygame.draw.rect(surface, bar_color, bar_position)

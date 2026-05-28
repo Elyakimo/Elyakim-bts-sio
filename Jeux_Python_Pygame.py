@@ -23,6 +23,10 @@ while running:
     screen.blit(game.player.image, game.player.rect)
     screen.blit(game.player2.image, game.player2.rect)
 
+    #afficher les barres de vie
+    game.player.update_health_bar(screen)
+    game.player2.update_health_bar(screen)
+
     #Deplacer et afficher les projectiles du joueur 1
     for projectile in game.player.all_projectiles:
         projectile.move()
@@ -34,6 +38,10 @@ while running:
     game.player.all_projectiles.draw(screen)
     #Afficher les projectiles du joueur 2
     game.player2.all_projectiles.draw(screen)
+    
+    #verifier les degats
+    game.player.damage(10)
+    game.player2.damage(10)
     
     #verifier le deplacement du joueur 1
     if game.pressed.get(pygame.K_d) and game.player.rect.x < 1080 - game.player.rect.width:
