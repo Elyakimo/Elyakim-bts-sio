@@ -16,6 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 100
         self.rect.y = 800
+        self.mask = pygame.mask.from_surface(self.image)
         #gravite
         self.gravity = 0.2
         self.velocity_y = 0

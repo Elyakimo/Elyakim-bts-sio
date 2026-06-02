@@ -1,5 +1,84 @@
-h1{color: rgb(0, 0, 255);}
-h4{color: rgb(128, 0, 255);}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+body {
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  color: #ababab;
+  background-color: #000000;
+
+}
+/*===== HEADER =====*/
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+    }
+}
+nav ul{
+    list-style : none;
+    display : contents;
+    justify-content : center;
+    gap : 30px;
+}
+nav ul li{
+    transform: translateY(1.2px);
+}
+nav a:hover{
+    background-color: rgb(87, 87, 87);
+}
+header {
+  background-color: #000000;
+  color: #fdfdfd;
+  padding: 30px 40px;
+  text-align: center;
+}
+ 
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.survol:hover {
+    background-color: rgb(87, 87, 87);
+}
+a:focus{
+    background-color: rgba(255, 0, 0, 0.23);
+}
+a:visited {
+    color: rgb(255, 255, 255);
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+/*===== MAIN =====*/
+main{
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+#grappling{
+    margin: 30px auto;
+}
+#striking{
+    margin: 30px auto;
+}
+#lutte{
+    margin: 30px auto;
+}
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+h4 {
+    text-decoration: underline;
+    text-align: center;
+}
 #image_lutte {
     border: 5px solid red;
     border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
@@ -15,45 +94,12 @@ h4{color: rgb(128, 0, 255);}
     border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
     box-shadow: 6px 6px 10px rgba(0, 255, 0, 0.5);
 }
-.couleur {
-    color : red;
+#image_striking:hover {
+    transform: translateY(-10px);
 }
-.taille {
-    font-size: 1.5em;
+#image_grappling:hover {
+    transform: translateY(-10px);
 }
-h4 {
-    text-decoration: underline;
-    text-align: center;
-}
-p {
-    text-align: justify;
-}
-h1 {
-    text-align: center;
-    font-size: 3em;
-}
-body {
-    background:linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0.5));
-    color : rgb(255, 255, 255);
-    margin: auto;
-    width: 80%;
-}
-.banniere {
-    padding: 150px;
-    background-image: url("https://static.cnews.fr/sites/default/files/styles/image_750_422/public/icon_41810333_5d388137591f4.jpg?itok=LkppGBQT");
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.501)), url("https://static.cnews.fr/sites/default/files/styles/image_750_422/public/icon_41810333_5d388137591f4.jpg?itok=LkppGBQT");
-    background-position: center;
-    background-size: cover;
-    width : auto;
-    height: 150px;
-
-}
-.survol:hover {
-    color: rgb(0, 254, 233);
-}
-a:focus{
-    background-color: rgba(255, 0, 0, 0.23);
-}
-a:visited {
-    color: rgb(0, 0, 0);
+#image_lutte:hover {
+    transform: translateY(-10px);
 }

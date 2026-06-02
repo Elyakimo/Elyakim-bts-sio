@@ -16,10 +16,12 @@ class Player2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 800
         self.rect.y = 800
+        self.mask = pygame.mask.from_surface(self.image)
         #gravite
         self.gravity = 0.2
         self.velocity_y = 0
         self.jump_speed = -11
+        
     
     
     def lancer_projectile(self):

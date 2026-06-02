@@ -11,5 +11,5 @@ class Game:
         self.player2 = Player2(self)
         self.pressed = {}
 
-    def check_collision(self, sprite, group):
+    def _check_collision(self, sprite, group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
