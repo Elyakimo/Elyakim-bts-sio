@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+body {
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  color: #ababab;
+  background-color: #000000;
+
+}
+/*===== HEADER =====*/
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+    }
+}
+nav ul{
+    list-style : none;
+    display : contents;
+    justify-content : center;
+    gap : 30px;
+}
+nav ul li{
+    transform: translateY(1.2px);
+}
+nav a:hover{
+    background-color: rgb(87, 87, 87);
+}
+header {
+  background-color: #000000;
+  color: #fdfdfd;
+  padding: 30px 40px;
+  text-align: center;
+}
+ 
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.survol:hover {
+    background-color: rgb(87, 87, 87);
+}
+a:focus{
+    background-color: rgba(255, 0, 0, 0.23);
+}
+a:visited {
+    color: rgb(255, 255, 255);
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+/*===== MAIN =====*/
+main{
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+#grappling{
+    margin: 30px auto;
+}
+#striking{
+    margin: 30px auto;
+}
+#lutte{
+    margin: 30px auto;
+}
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+h4 {
+    text-decoration: underline;
+    text-align: center;
+}
+#image_lutte {
+    border: 5px solid red;
+    border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
+    box-shadow: 6px 6px 10px rgba(255, 0, 0, 0.6);
+}
+#image_grappling {
+    border: 5px solid blue;
+    border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
+    box-shadow: 6px 6px 10px rgba(0, 0, 255, 0.6);
+}
+#image_striking {
+    border: 5px solid green;
+    border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
+    box-shadow: 6px 6px 10px rgba(0, 255, 0, 0.5);
+}
+#image_striking:hover {
+    transform: translateY(-10px);
+}
+#image_grappling:hover {
+    transform: translateY(-10px);
+}
+#image_lutte:hover {
+    transform: translateY(-10px);
+}
