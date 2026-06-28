@@ -1,4 +1,4 @@
-* {
+** {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,24 +11,8 @@ body {
   background-color: #000000;
 
 }
-/*===== HEADER =====*/
-@media (max-width: 600px) {
-    nav ul {
-        flex-direction: column;
-    }
-}
-nav ul{
-    list-style : none;
-    display : contents;
-    justify-content : center;
-    gap : 30px;
-}
-nav ul li{
-    transform: translateY(1.2px);
-}
-nav a:hover{
-    background-color: rgb(87, 87, 87);
-}
+ 
+/* ===== HEADER ===== */
 header {
   background-color: #000000;
   color: #fdfdfd;
@@ -40,66 +24,87 @@ header h1 {
   font-size: 2rem;
   margin-bottom: 8px;
 }
-.survol:hover {
-    background-color: rgb(87, 87, 87);
+ 
+/* ===== CONTENU PRINCIPAL ===== */
+main {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
-a:focus{
-    background-color: rgba(255, 0, 0, 0.23);
+ 
+h2 {
+  color: #326caa;
+  border-bottom: 2px solid #1A73E8;
+  padding-bottom: 8px;
+  margin: 30px 0 15px 0;
 }
-a:visited {
-    color: rgb(255, 255, 255);
+ 
+/* ===== CARTES COMPETENCES ===== */
+.competence {
+  background: rgb(97, 97, 97);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(134, 134, 134, 0.1);
+
 }
+ 
+/* ===== FOOTER ===== */
+footer {
+  background-color: #333333;
+  color: white;
+  text-align: center;
+}
+/* ===== NAVIGATION ===== */
+nav {
+    margin-top: 15px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 0;
+}
+
 nav a{
     color: white;
     text-decoration: none;
     font-weight: bold;
     padding: 8px 16px;
-    border-radius: 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
 }
-/*===== MAIN =====*/
-main{
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
+
+nav a:hover {
+    background-color:rgba(255, 255, 255, 0.2);
 }
-#grappling{
-    margin: 30px auto;
+.competence:hover {
+    transform: translateY(-4px);
+    transition: transform 0.2s;
+    background-color: rgb(19, 7, 250);
 }
-#striking{
-    margin: 30px auto;
+:root {
+    --couleur: 1A3A5C;
+    color: var(--couleur);
 }
-#lutte{
-    margin: 30px auto;
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+    }
 }
-h1 {
-    text-align: center;
-    font-size: 3em;
+@keyframes fadeIn { 
+    from{
+        opacity:0
+    }
+    to{
+        opacity:1
+    }
+    h1{
+        animation: fadIn 1s;
+    }
 }
-h4 {
-    text-decoration: underline;
-    text-align: center;
-}
-#image_lutte {
-    border: 5px solid red;
-    border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
-    box-shadow: 6px 6px 10px rgba(255, 0, 0, 0.6);
-}
-#image_grappling {
-    border: 5px solid blue;
-    border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
-    box-shadow: 6px 6px 10px rgba(0, 0, 255, 0.6);
-}
-#image_striking {
-    border: 5px solid green;
-    border-radius: 20% 80% 20% 80% / 20% 80% 20% 80% ;
-    box-shadow: 6px 6px 10px rgba(0, 255, 0, 0.5);
-}
-#image_striking:hover {
-    transform: translateY(-10px);
-}
-#image_grappling:hover {
-    transform: translateY(-10px);
-}
-#image_lutte:hover {
-    transform: translateY(-10px);
+.image:hover {
+    transform: scale(1.5);
+    transition: transform 0.3s;
 }
