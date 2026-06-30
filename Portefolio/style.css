@@ -18,6 +18,11 @@ header {
   color: #fdfdfd;
   padding: 30px 40px;
   text-align: center;
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  z-index: 1000;
 }
  
 header h1 {
@@ -31,29 +36,65 @@ main {
   margin: 40px auto;
   padding: 0 20px;
 }
- 
+.accueil{
+  padding-top: 100px;
+}
 h2 {
   color: #326caa;
   border-bottom: 2px solid #1A73E8;
   padding-bottom: 8px;
   margin: 30px 0 15px 0;
 }
-table {
+.tableau-bts{
+  display: grid;
   border-collapse: collapse;
   width: 100%;
 }
+
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
 }
-th {
-  background-color: #f2f2f2;
-  text-align: left;
-}
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
- 
+table {
+    width: 600px;
+    border-collapse: collapse;
+    background: #000000;
+    border: 1px solid #d8d2c400;
+    border-radius: 12px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 16px;
+    border-bottom: 1px solid #fffdfd;
+    vertical-align: top;
+
+  }
+
+  thead th {
+    color: #999;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+
+  .reveal-wrap {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+  }
+
+  .reveal-wrap p {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #ffffff;
+    line-height: 1.5;
+  }
+
+  tr.has-reveal:hover .reveal-wrap {
+    max-height: 100px;
+    opacity: 1;
+  }
 /* ===== CARTES COMPETENCES ===== */
 .competence {
   background: rgb(97, 97, 97);
@@ -64,8 +105,9 @@ tr:nth-child(even) {
   animation-name:fadeIn;
   animation-duration: 2s;
   animation-iteration-count: ease-in-out;
-
 }
+
+
  
 /* ===== FOOTER ===== */
 footer {
