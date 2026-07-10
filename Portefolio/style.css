@@ -1,26 +1,60 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
  
+:root {
+  --couleur: #1A3A5C;
+  --surface: #FFF;
+  --ink: #16233D;
+  --ink-soft: #4B5871;
+  --accent: #C4453B;
+  --mono: 'IBM Plex Mono';
+  /* Correction : il y avait un DEUXIEME bloc :root plus bas dans le fichier, qui redéfinissait
+     --couleur avec une valeur invalide (1A3A5C sans le #) et qui écrasait donc celle-ci.
+     Un seul bloc :root suffit pour toutes tes variables. */
+    --info:#2A5A8C; / --info-soft
+}
+html{
+  scroll-behavior:smooth;
+}
+a
+{ color:var(--info);
+text-decoration-color:
+transparent;}
+
 body {
   font-family: Poppins, sans-serif;
   font-size: 16px;
   color: #ababab;
   background-color: #000000;
-
 }
- 
+header.topbar{
+position:sticky; top:0;
+z-index:50;
+background:rgba(18, 18, 18, 0.92);
+backdrop-filter:blur(6px);
+}
+.nav::before{content:
+'▸ '; opacity:.5;}
+.nav.active{color:var(--ink);
+border-bottom-color:
+var(--accent);
+}
+
+
+
 /* ===== HEADER ===== */
 header {
   background-color: #000000;
   color: #fdfdfd;
   padding: 30px 40px;
   text-align: center;
-  position:fixed;
-  top:0;
-  left:0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   z-index: 1000;
 }
@@ -28,6 +62,9 @@ header {
 header h1 {
   font-size: 2rem;
   margin-bottom: 8px;
+  color: var(--accent);
+  /* Amélioration : ta variable --couleur/--accent n'était utilisée nulle part dans le fichier.
+     Je l'utilise ici pour donner un vrai accent visuel au titre principal. */
 }
  
 /* ===== CONTENU PRINCIPAL ===== */
@@ -36,69 +73,80 @@ main {
   margin: 40px auto;
   padding: 0 20px;
 }
-.qui-suis-je, .moi, .Points_fort {
-  padding-top: 150px;
+ 
+/* Correction : le header est en position:fixed, donc il recouvre le haut de la page.
+   Le padding-top:150px n'était posé que sur .qui-suis-je et .moi (classe qui n'existe
+   dans aucune balise HTML) et .Points_fort (jamais utilisée non plus) : les liens vers
+   #apropos et #competence restaient donc cachés sous le header au clic.
+   scroll-margin-top corrige le problème directement sur les cibles d'ancrage, pour
+   n'importe quel lien qui pointe vers elles. */
+#accueil,
+#apropos,
+#competence {
+  scroll-margin-top: 140px;
 }
+ 
 h2 {
   color: #326caa;
   border-bottom: 2px solid #1A73E8;
   padding-bottom: 8px;
   margin: 30px 0 15px 0;
 }
-
-  h2 {
-    margin-bottom: 24px;
-  }
  
-  .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 500px;
-  }
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+  width: 100%;
+  /* Correction : width:500px fixe pouvait déborder sur un écran de mobile plus étroit
+     que 500px. max-width + width:100% garde la même taille sur grand écran tout en
+     s'adaptant aux petits écrans. */
+}
  
-  .card {
-    background: #f5f1e9;
-    border: 1px solid #d8d2c4;
-    border-radius: 12px;
-    padding: 20px 24px;
-    overflow: hidden;
-    cursor: default;
-  }
+.card {
+  background: #f5f1e9;
+  border: 1px solid #d8d2c4;
+  border-radius: 12px;
+  padding: 20px 24px;
+  overflow: hidden;
+  cursor: default;
+}
  
-  .card h3 {
-    margin: 0 0 4px;
-    font-size: 16px;
-  }
+.card h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
  
-  .card .sous-titre {
-    margin: 0;
-    color: #777;
-    font-size: 14px;
-  }
+.card .sous-titre {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
  
-  /* Texte caché par défaut */
-  .reveal {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
-    margin-top: 0;
-  }
+/* Texte caché par défaut */
+.reveal {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
  
-  .reveal p  {
-    margin: 0;
-    font-size: 13px;
-    color: #555;
-    line-height: 1.6;
-  }
-
-  /* Révélation au survol */
-  .card:hover .reveal {
-    max-height: 100px;
-    opacity: 1;
-    margin-top: 12px;
-  }
+.reveal p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+}
+ 
+/* Révélation au survol */
+.card:hover .reveal {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 12px;
+}
+ 
 /* ===== CARTES COMPETENCES ===== */
 .competence {
   background: rgb(97, 97, 97);
@@ -106,19 +154,30 @@ h2 {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(134, 134, 134, 0.1);
-  animation-name:fadeIn;
+  animation-name: fadeIn;
   animation-duration: 2s;
-  animation-iteration-count: ease-in-out;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  /* Correction : animation-iteration-count attend un NOMBRE de répétitions (ou "infinite"),
+     pas un mot-clé de vitesse. "ease-in-out" est une courbe de timing : elle va dans
+     animation-timing-function, pas dans animation-iteration-count. */
 }
-
-
+ 
+.competence:hover {
+  transform: translateY(-4px);
+  transition: transform 0.2s;
+  background-color: rgb(19, 7, 250);
+}
  
 /* ===== FOOTER ===== */
 footer {
   background-color: #333333;
   color: white;
   text-align: center;
+  padding: 20px;
+  /* Amélioration : un peu de padding pour que le texte ne colle pas aux bords du footer. */
 }
+ 
 .contact {
   list-style: none;
   padding: 0;
@@ -126,56 +185,76 @@ footer {
   display: flex;
   flex-direction: column;
 }
+ 
 /* ===== NAVIGATION ===== */
 nav {
-    margin-top: 15px;
+  margin-top: 15px;
 }
+ 
 nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 0;
 }
-
-nav a{
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 16px;
-    border-radius: 4px;
-    transition: background 0.2s;
+ 
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.2s;
 }
-
+ 
 nav a:hover {
-    background-color:rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
-.competence:hover {
-    transform: translateY(-4px);
-    transition: transform 0.2s;
-    background-color: rgb(19, 7, 250);
+#accueil, #apropos, #competence {
+  scroll-margin-top: 190px; /* au lieu de 140px */
 }
-:root {
-    --couleur: 1A3A5C;
-    color: var(--couleur);
-}
+ 
 @media (max-width: 600px) {
-    nav ul {
-        flex-direction: column;
-    }
+  nav ul {
+    flex-direction: column;
+  }
 }
-@keyframes fadeIn { 
-    from{
-        opacity:0
-    }
-    to{
-        opacity:1
-    }
-    h1{
-        animation: fadIn 1s;
-    }
+ 
+/* Correction : @keyframes n'accepte que des étapes en % (ou from/to), pas de sélecteurs
+   d'éléments comme "h1{...}" à l'intérieur. Cette règle a été sortie du bloc @keyframes
+   et placée séparément juste en dessous. Le nom "fadIn" (sans e) a aussi été corrigé en
+   "fadeIn" pour correspondre au nom réellement défini ici. */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.image:hover {
-    transform: scale(1.5);
-    transition: transform 0.3s;
+ 
+header h1 {
+  animation: fadeIn 1s;
+}
+ 
+.image {
+  overflow: hidden;
+  display: inline-block;
+  /* Correction : sans overflow:hidden sur le conteneur, l'image agrandie au survol
+     (transform: scale) débordait par-dessus le texte autour au lieu d'être "coupée"
+     proprement dans son cadre. */
+}
+ 
+.image img {
+  display: block;
+  transition: transform 0.3s;
+}
+ 
+.image:hover img {
+  transform: scale(1.5);
+  /* Correction : la règle originale était .image:hover { transform: scale(1.5); },
+     ce qui agrandit le DIV conteneur (donc son contenu déborde). On agrandit ici
+     directement l'image (.image img) à l'intérieur du conteneur qui, lui, reste
+     fixe et masque le débordement grâce à overflow:hidden ci-dessus. */
 }

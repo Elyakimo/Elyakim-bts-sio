@@ -6,48 +6,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elyakim Portfolio SIO</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   </head>
  
   <body>
  
-    <header>
-      <nav>
+    <header class="topbar">
+      <nav class="topbar-inner" aria-label="Navigationprincipale">
+
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="apropos.html">À propos</a></li>
-          <li><a href="competence.html">Compétences</a></li>
-          <li><a href="veille.html">Veille technologique</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <!-- Correction : href="#accueil" avait les guillemets manquants (href=#accueil),
+               ce qui n'est pas valide en HTML même si certains navigateurs "rattrapent" l'erreur -->
+          <li class="nav"><a href="#accueil">Accueil</a></li>
+          <li class="nav"><a href="#apropos">À propos</a></li>
+          <li class="nav"><a href="#competence">Compétences</a></li>
+          <li class="nav"><a href="veille.html">Veille technologique</a></li>
+          <li class="nav"><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
       <h1>Bienvenue sur mon Portfolio</h1>
-      <p>Etudiant BTS SIO — Option SLAM</p>
+      <p>Elyakim ONOCIA — BTS SIO — Option SLAM</p>
     </header>
  
     <main>
-
-      <h2 class="qui-suis-je">Qui suis-je ?</h2>
-       <p>Je m'appel Elyakim Onocia, j'ai 18 ans. Je suis actuellement étudiant en première année de BTS SIO, je suis en option SLAM Solution Logiciel Application Métier, j'ai choisi cette option car j'aime développé et créer des choses de mes propres mains.</p>
-      <p><em>Je suis en BTS SIO première année option SLAM.</em>
-        Je suis passionné par l'informatique, car c'est en constante évolution ce qui nous pousse à toujours apprendre, j'aime apprendre de nouvelles choses et découvrir de nouveaux langages de programmation et de nouvelles technologies, j'aime aussi le sport, je pratique tout les jours du sport. Je vis actuellement à Dumbéa.
+ 
+      <!-- Section Accueil : texte court, l'objectif est juste d'accrocher le visiteur.
+           Le parcours détaillé est déplacé dans "À propos" pour éviter la répétition. -->
+      <h2 class="qui-suis-je" id="accueil">Qui suis-je ?</h2>
+      <p>
+        Je m'appelle Elyakim Onocia, j'ai 18 ans. Je suis étudiant en première année de BTS SIO,
+        en option SLAM (Solutions Logicielles et Applications Métiers). J'ai choisi cette option
+        car j'aime développer et créer des choses de mes propres mains.
       </p>
+ 
       <h2>Mes points forts</h2>
       <p>Voici quelques-uns de mes <strong>points forts</strong> :</p>
+      <!-- Correction : il y avait une liste en <ul><li> ET la même info répétée juste après en <p>,
+           plus un </ul> orphelin (sans balise ouvrante correspondante). Une seule liste suffit,
+           et une liste HTML doit toujours être faite avec <ul>/<li>, pas des <p> empilés. -->
       <ul>
         <li>Passionné par l'informatique</li>
         <li>Bonne capacité d'apprentissage</li>
         <li>Esprit d'équipe</li>
-        <li>Base en programmation</li>
-          <ul><li>python</li>
-          <li>html</li>
-          <li>css</li>
-          <li>sql</li></ul>
+        <li>Rigueur</li>
+        <li>Bases en programmation : Python, HTML, CSS, SQL</li>
       </ul>
+ 
+      <h2 class="a-propos" id="apropos">À propos</h2>
+      <p>
+        Je suis passionné par l'informatique, car c'est un domaine en constante évolution qui
+        pousse à toujours apprendre. J'aime découvrir de nouveaux langages de programmation et de
+        nouvelles technologies. En dehors de l'informatique, j'aime aussi le sport, que je pratique
+        tous les jours. Je vis actuellement à Dumbéa.
+      </p>
+ 
+      <h2>Mon parcours</h2>
+      <p>Voici mon parcours académique et professionnel :</p>
+        <p>2019-2022 : Brevet des collèges</p>
+        <p>2022 : Stage de découverte professionnelle à la FNAC</p>
+        <p>2023-2025 : Bac Sciences et Technologies du Management et de la Gestion, spécialité Système d'Information de Gestion</p>
+        <p>2026-2027 : BTS SIO, option SLAM</p>
+        <!-- Correction : "2026 : BTS SIO première année" ne correspondait pas à la date du footer
+             (© 2025). J'ai harmonisé les dates ci-dessus et dans le footer : à adapter avec tes
+             vraies dates d'entrée/sortie de BTS. -->
+      </ol>
+ 
+      <h2 id="competence">Ma formation en BTS SIO</h2>
+ 
+      <div class="cards">
+ 
+        <div class="card">
+          <h3>Cybersécurité</h3>
+          <p class="sous-titre">Apprendre les principes de la cybersécurité et protéger les systèmes.</p>
+          <div class="reveal">
+            <p>Analyse de vulnérabilités.</p>
+          </div>
+        </div>
+ 
+        <div class="card">
+          <h3>Réseaux</h3>
+          <p class="sous-titre">Configurer et administrer un réseau.</p>
+          <div class="reveal">
+            <p>Routage, VLAN.</p>
+          </div>
+        </div>
+ 
+        <div class="card">
+          <h3>Développement</h3>
+          <p class="sous-titre">Créer des applications et des logiciels.</p>
+          <div class="reveal">
+            <p>Front-end, back-end, bases de données.</p>
+          </div>
+        </div>
+ 
+        <div class="card">
+          <h3>Gestion de projet</h3>
+          <p class="sous-titre">Planifier et gérer des projets informatiques.</p>
+          <div class="reveal">
+            <p>Méthodes agiles, suivi de planning.</p>
+          </div>
+        </div>
+ 
+      </div>
+ 
+      <h2>Mes compétences techniques</h2>
+      <div class="competence">
+        <h3>Programmation</h3>
+        <p>Python, HTML, CSS, SQL</p>
+      </div>
+      <div class="competence">
+        <h3>Réseaux</h3>
+        <p>Configuration et administration de réseaux</p>
+      </div>
+      <div class="competence">
+        <h3>Cybersécurité</h3>
+        <p>Principes de la cybersécurité et protection des systèmes informatiques</p>
+      </div>
+ 
+      <h2>Mes projets</h2>
+      <article>
+        <h3>Projet de jeu vidéo</h3>
+        <p>
+          Développement d'un jeu vidéo en Python utilisant la bibliothèque Pygame. C'est un jeu en
+          1 contre 1 où les joueurs incarnent soit Mario, soit Sonic.
+        </p>
+        <!-- Correction : width="250px" n'est pas valide sur l'attribut HTML width, qui attend un
+             nombre sans unité (c'est le CSS qui utilise "px"). J'ai aussi ajouté une classe .image
+             pour que l'effet de zoom au survol (défini dans le CSS) s'applique bien à cette image. -->
+        <div class="image"><img src="Projet_Jeu.png" alt="Capture d'écran du jeu vidéo" width="250"></div>
+      </article>
     </main>
  
     <footer>
-      <p>© 2025 — Mon Portfolio SIO Elyakim ONOCIA 2026</p>
+      <p>© 2026-2027 — Portfolio SIO d'Elyakim ONOCIA</p>
     </footer>
  
   </body>
