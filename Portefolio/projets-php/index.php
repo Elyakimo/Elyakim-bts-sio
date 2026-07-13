@@ -8,21 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   </head>
-<style>
-	html {
-NU nano 8.7.1                     index.php *
-<!DOCTYPE html>
-<html lang="fr">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elyakim Portfolio SIO</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;7>
-  </head>
 <style>
-        html {
+html {
   font-size: 16px;
 }
 
