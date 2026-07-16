@@ -10,39 +10,7 @@
   </head>
 
 <style>
-html {
-  font-size: 16px;
-}
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --couleur: #1A3A5C;
-  --surface: #FFF;
-  --ink: #16233D;
-  --ink-soft: #4B5871;
-  --accent: #C4453B;
-  --mono: 'IBM Plex Mono';
-  --info: #2A5A8C;
-  --info-soft: #DDE7F2;
-  /* Correction : la ligne d'origine était
-       --info:#2A5A8C; / --info-soft
-     Le "/" cassait la déclaration et --info-soft n'avait pas de valeur.
-     Il manquait un point-virgule et une couleur pour --info-soft (ajoutée >
-     un bleu clair assorti à --info, à ajuster selon ton besoin). */
-}
-  font-size: 16px;
-}
- 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
  
 :root {
   --couleur: #1A3A5C;
@@ -59,9 +27,14 @@ html {
      Il manquait un point-virgule et une couleur pour --info-soft (ajoutée ici,
      un bleu clair assorti à --info, à ajuster selon ton besoin). */
 }
- 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
  
 a {
@@ -89,6 +62,9 @@ body {
   color: white;
 }
 .btn{
+  position: absolute;
+  left: 100%;
+  right: 10%;
   padding: 1em;
   border: 1px solid;      /* correction : "solid, 1em" n'était pas une syntaxe valide */
   border-radius: 50%;
@@ -126,11 +102,6 @@ header.topbar {
   z-index: 50;
   background: rgba(18, 18, 18, 0.92);
   backdrop-filter: blur(0.375rem); /* 6px */
-}
- 
-nav::before {
-  content: '▸';
-  opacity: .5;
 }
  
 .nav.active {
@@ -589,14 +560,12 @@ function ajusterScrollMargin() {
 }
 window.addEventListener('load', ajusterScrollMargin);
 window.addEventListener('resize', ajusterScrollMargin);
-const modeIcon = document.getElementById=('mode-icon');
+const modeIcon = document.getElementById('mode-icon');
 
 function toggleMode() {
-	document.body.classList.toggle("dark");
-	modeIcon.classList.add('spin')
-	
+	modeIcon.classList.add('spin');
 	setTimeout(() => {
-		document.body.classList.toggle('dark'));
+		document.body.classList.toggle('dark');
 		const estSombre = document.body.classList.contains('dark');
 		modeIcon.textContent = estSombre ? '🌞' : '🌙';
 }, 250);
