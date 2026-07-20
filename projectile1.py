@@ -26,7 +26,7 @@ class Projectile1(pygame.sprite.Sprite):
         
         #verifier si le projectile entre en collision avec le joueur 2
         player2_group = pygame.sprite.Group(self.player.game.player2)   
-        for player2 in self.player.game.check_collision(self, player2_group):
+        for player2 in self.player.game._check_collision(self, player2_group):
             #enlever le projectile
             self.remove() 
             #infliger des degats au joueur 2

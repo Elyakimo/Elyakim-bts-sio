@@ -1,0 +1,27 @@
+span[class^="statut-"] {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.85em;
+        font-weight: bold;
+        color: white;
+    }
+
+    .statut-attente {
+        background-color: #9e9e9e; /* gris : non commencé */
+    }
+
+    .statut-recherche {
+        background-color: #2196f3; /* bleu : en recherche */
+    }
+
+    .statut-candidature {
+        background-color: #ff9800; /* orange : candidature envoyée */
+    }
+
+    .statut-entretien {
+        background-color: #9c27b0; /* violet : entretien obtenu */
+    }
+
+    .statut-ok {
+        background-color: #4caf50; /* vert : stage trouvé */
+    }

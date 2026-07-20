@@ -101,6 +101,8 @@
     width: 100%;
     height: 100%;
   }
+
+ 
   .etude{
     box-sizing: border-box;
     display: flex;
@@ -110,6 +112,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color:#97959596
   }
   .metiers{
     box-sizing: border-box;

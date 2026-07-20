@@ -51,7 +51,7 @@ class Player2(pygame.sprite.Sprite):
 
     def damage(self, amount):
         # Vérifier les collisions avec les projectiles du joueur 1
-        colliding_projectiles = self.game.check_collision(self, self.game.player.all_projectiles)
+        colliding_projectiles = self.game._check_collision(self, self.game.player.all_projectiles)
         if colliding_projectiles:
             for projectile in colliding_projectiles:
                 projectile.kill()  # Supprimer le projectile

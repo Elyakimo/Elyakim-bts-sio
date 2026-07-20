@@ -8,7 +8,7 @@ pygame.display.set_caption("Binks2Binks")
 screen = pygame.display.set_mode((1080, 720))
 pygame.display.set_icon(pygame.image.load("assets/icon.png"))
 # importer le fond de notre jeu
-background = pygame.image.load("assets/fond.PNG")
+background = pygame.image.load("assets/fond.png")
 
 #charger notre jeu
 game = Game()

@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
     
     def damage(self, amount):
         # Vérifier les collisions avec les projectiles du joueur 2
-        colliding_projectiles = self.game.check_collision(self, self.game.player2.all_projectiles)
+        colliding_projectiles = self.game._check_collision(self, self.game.player2.all_projectiles)
     
         if colliding_projectiles:
             for projectile in colliding_projectiles:
