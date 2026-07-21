@@ -65,11 +65,13 @@ $etudiants = $requete->fetchAll(PDO::FETCH_ASSOC);
         		</span>
     			</td>
     			<td><?php echo htmlspecialchars($etudiant["date_creation"]); ?></td>
+				<td><button type="button" class="btn-supprimer" data-id="<?= (int) $etudiant["id"] ?>">Supprimer</button></td>
 			</tr>
 		<?php } ?>
-	</table>
-	<button type="button" class="btn-supprimer" data-id="<?= (int) $etudiant["id"] ?>">Supprimer</button>
-
+</table>
+	<input type="search" id="rechercheAjax" placeholder="Recherche instantanée">
+	<div id="resultatsAjax">
+	</div>
 </body>
 <script src="assets/js/liste.js"></script>
 </html>

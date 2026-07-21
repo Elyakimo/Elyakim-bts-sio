@@ -79,11 +79,13 @@ if ($recherche !== "") {
                         <td><?php echo htmlspecialchars($etudiant["classe"]); ?></td>
                         <td><?php echo htmlspecialchars($etudiant["statut_stage"]); ?></td>
                         <td><?php echo htmlspecialchars($etudiant["email"]); ?></td>
+                        <td>
+                            <button type="button" class="btn-supprimer" data-id="<?= (int) $etudiant["id"] ?>">Supprimer</button>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
-			<button type="button" class="btn-supprimer" data-id="<?= (int) $etudiant["id"] ?>">Supprimer</button>
 
     <?php } ?>
 
