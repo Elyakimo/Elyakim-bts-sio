@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMA — Histoire du combat libre</title>
+
+<!--
+  ============================================================
+  POLICES GOOGLE FONTS
+  - "Bebas Neue"    : police d'affiche condensée, utilisée pour
+                       les grands titres (effet "affiche de gala
+                       de boxe / carte de combat").
+  - "Archivo"       : police de texte courante, très lisible,
+                       plusieurs graisses pour hiérarchiser.
+  - "JetBrains Mono": police monospace utilisée pour tout ce qui
+                       ressemble à des "statistiques" (dates,
+                       "tale of the tape", compteur de round) —
+                       ça donne un côté "feuille de match".
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================================================================
+   1. TOKENS DE DESIGN (variables CSS)
+   ----------------------------------------------------------------
+   Palette inspirée du papier d'une affiche de combat vintage :
+   fond "papier kraft" crème, encre noire, un rouge "sang / gant"
+   et un or "ceinture de champion". Volontairement PAS de fond
+   noir + néon (cliché "MMA agressif"), on préfère l'esthétique
+   affiche/archive, plus proche du sujet "histoire".
+   ================================================================ */
+:root{
+  --papier:        #EDE6D6; /* fond principal, couleur papier crème */
+  --papier-sombre:  #E1D8C3; /* variante légèrement plus foncée, pour alterner les sections */
+  --encre:         #17130F; /* noir chaud, quasi texte/CTA principal */
+  --sang:          #A31E17; /* rouge accent (gants, alertes, liens actifs) */
+  --or:            #B8912E; /* or, réservé aux éléments "champion / titre" */
+  --acier:         #6E6656; /* gris-brun pour les textes secondaires */
+  --ligne:         rgba(23,19,15,0.15); /* couleur des filets/séparateurs fins */
+
+  /* Échelle typographique */
+  --taille-h1: clamp(3.2rem, 12vw, 9rem);
+  --taille-h2: clamp(2.2rem, 6vw, 4.2rem);
+  --taille-h3: clamp(1.4rem, 3vw, 1.9rem);
+
+  /* Rythme d'espacement, basé sur une unité de 8px */
+  --esp-1: 0.5rem;
+  --esp-2: 1rem;
+  --esp-3: 1.5rem;
+  --esp-4: 2.5rem;
+  --esp-5: 4rem;
+  --esp-6: 7rem;
+}
+
+/* ================================================================
+   2. RESET MINIMAL
+   ================================================================ */
+*, *::before, *::after{ 
+  box-sizing: border-box; 
+}
+html{ 
+  scroll-behavior: smooth; 
+} /* le scroll fluide de secours si le JS ne charge pas */
+body{
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img{ 
+  max-width: 100%; 
+  display:block; 
+}
+a{ 
+  color: inherit;
+}
+h1,h2,h3,h4{ 
+  margin: 0; 
+  font-family: 'Bebas Neue', sans-serif; 
+  letter-spacing: 0.01em; 
+}
+p{ 
+  margin: 0; 
+}
+ul{ 
+  margin:0;
+  padding:0; 
+  list-style:none; 
+}
+button{ 
+  font-family: inherit; 
+  cursor:pointer; 
+}
+
+/* Accessibilité : on garde un focus visible clair, comme demandé
+   par les bonnes pratiques (ne jamais supprimer outline sans le
+   remplacer par quelque chose d'aussi visible). */
+a:focus-visible, button:focus-visible{
+  outline: 3px solid var(--sang);
+  outline-offset: 3px;
+}
+
+/* Respect de la préférence "réduire les animations" du système */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Petite classe utilitaire réutilisée partout pour limiter la
+   largeur de contenu et centrer horizontalement. */
+.conteneur{
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: var(--esp-3);
+}
+
+/* "Œillet" éditorial : petit label majuscule au-dessus des titres,
+   en mono, façon étiquette de dossier d'archive. */
+.oeillet{
+  display:inline-flex;
+  align-items:center;
+  gap: 0.5em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sang);
+  margin-bottom: var(--esp-2);
+}
+.oeillet::before{
+  content:"";
+  width: 22px; height: 2px;
+  background: var(--sang);
+  display:inline-block;
+}
+
+/* ================================================================
+   3. NAVIGATION (barre fixe en haut)
+   ================================================================ */
+.nav{
+  position: fixed;
+  top:0; left:0; right:0;
+  z-index: 100;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: var(--esp-2) var(--esp-3);
+  background: rgba(237,230,214,0.9); /* légère transparence + flou */
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--ligne);
+}
+.nav__marque{
+  font-family:'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  display:flex;
+  align-items:baseline;
+  gap: 0.4em;
+}
+.nav__marque span{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--acier);
+  letter-spacing: 0.1em;
+}
+.nav__liens{
+  display:flex;
+  gap: var(--esp-4);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.nav__liens a{
+  text-decoration:none;
+  position:relative;
+  padding-bottom: 4px;
+  color: var(--encre);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+/* La classe .actif est ajoutée/retirée en JS selon la section
+   visible à l'écran (voir IntersectionObserver plus bas). */
+.nav__liens a.actif{
+  opacity: 1;
+  color: var(--sang);
+}
+.nav__liens a.actif::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-2px;
+  height: 2px;
+  background: var(--sang);
+}
+
+/* Badge "ROUND X/6" toujours visible : c'est notre repère de
+   progression dans l'histoire, sur le thème du combat. */
+.compteur-round{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--encre);
+  padding: 0.35em 0.7em;
+  white-space: nowrap;
+}
+
+/* Bouton "menu" mobile, masqué par défaut sur grand écran */
+.nav__toggle{
+  display:none;
+  background:none;
+  border:1px solid var(--encre);
+  padding: 0.4em 0.6em;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 860px){
+  .nav__liens{
+    position: fixed;
+    top: 56px; left:0; right:0;
+    background: var(--papier);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid var(--ligne);
+    max-height: 0;
+    overflow:hidden;
+    transition: max-height 0.3s ease;
+  }
+  /* Quand le menu mobile est ouvert (classe ajoutée par le JS) */
+  .nav__liens.ouvert{ max-height: 400px; }
+  .nav__liens a{
+    padding: var(--esp-2) var(--esp-3);
+    border-bottom: 1px solid var(--ligne);
+    opacity: 1;
+  }
+  .nav__toggle{ display:block; }
+  .compteur-round{ display:none; }
+}
+
+/* ================================================================
+   4. HERO — affiche d'ouverture
+   ================================================================ */
+.hero{
+  min-height: 100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  position: relative;
+  padding: calc(var(--esp-6) + 3rem) var(--esp-3) var(--esp-5);
+  background:
+    /* Fine texture de "grain papier" via un dégradé répété très subtil */
+    repeating-linear-gradient(45deg, rgba(23,19,15,0.02) 0 2px, transparent 2px 4px),
+    var(--papier);
+  overflow: hidden;
+}
+/* Le grand octogone en filet, en fond du hero — clin d'œil à la
+   cage, dessiné uniquement en traits (pas rempli) pour rester
+   discret et "gravure d'archive" plutôt que "logo criard". */
+.hero__octogone{
+  position:absolute;
+  right:-10%; top:50%;
+  width: min(70vw, 900px);
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  opacity: 0.55;
+  pointer-events:none;
+}
+.hero__tampon{
+  position:absolute;
+  top: 100px; right: var(--esp-4);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-align:right;
+  color: var(--acier);
+  border: 1px solid var(--acier);
+  padding: var(--esp-2);
+  transform: rotate(4deg);
+  line-height: 1.6;
+}
+.hero__contenu{ position:relative; max-width: 900px; }
+.hero h1{
+  font-size: var(--taille-h1);
+  line-height: 0.85;
+  color: var(--encre);
+}
+.hero h1 em{
+  font-style: normal;
+  color: var(--sang);
+}
+.hero__sous-titre{
+  margin-top: var(--esp-3);
+  max-width: 34ch;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--acier);
+  font-weight: 500;
+}
+.hero__actions{
+  margin-top: var(--esp-4);
+  display:flex;
+  gap: var(--esp-3);
+  flex-wrap:wrap;
+  align-items:center;
+}
+.bouton{
+  display:inline-flex;
+  align-items:center;
+  gap: 0.6em;
+  background: var(--encre);
+  color: var(--papier);
+  text-decoration:none;
+  border: none;
+  padding: 0.9em 1.6em;
+  font-family:'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.bouton:hover{ background: var(--sang); transform: translateY(-2px); }
+.lien-discret{
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--acier);
+}
+.hero__scroll{
+  position:absolute;
+  bottom: var(--esp-3); left: var(--esp-3);
+  display:flex;
+  align-items:center;
+  gap: var(--esp-1);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--acier);
+}
+/* Petite barre qui "respire" pour inviter au scroll (animation
+   discrète et non essentielle -> respecte prefers-reduced-motion) */
+.hero__scroll .barre{
+  width: 1px; height: 26px;
+  background: var(--acier);
+  overflow:hidden;
+  position:relative;
+}
+.hero__scroll .barre::after{
+  content:"";
+  position:absolute; top:-100%; left:0; right:0; height:100%;
+  background: var(--sang);
+  animation: descendre 1.8s ease-in-out infinite;
+}
+@keyframes descendre{
+  0%{ top:-100%; } 60%{ top:100%; } 100%{ top:100%; }
+}
+
+/* ================================================================
+   5. STRUCTURE GÉNÉRALE DES SECTIONS
+   ================================================================ */
+section{ padding: var(--esp-6) 0; position:relative; }
+.section--sombre{
+  background: var(--encre);
+  color: var(--papier);
+}
+.section--sombre .oeillet{ color: var(--or); }
+.section--sombre .oeillet::before{ background: var(--or); }
+
+.intro{
+  max-width: 760px;
+}
+.intro p{ font-size: 1.15rem; color: var(--acier); }
+.intro p + p{ margin-top: var(--esp-2); }
+
+/* ================================================================
+   6. TIMELINE "ROUNDS"
+   ----------------------------------------------------------------
+   Chaque grande époque du MMA est présentée comme un "round" —
+   c'est un choix structurel justifié : l'histoire du MMA se
+   raconte réellement dans l'ordre chronologique, et le vocabulaire
+   du round appartient au sport lui-même (contrairement à une
+   numérotation générique 01/02/03).
+   ================================================================ */
+.round{
+  border-top: 1px solid var(--ligne);
+  padding-block: var(--esp-5);
+  display:grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--esp-4);
+  /* état initial pour l'animation de révélation au scroll (JS) */
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.round.visible{ opacity:1; transform: translateY(0); }
+
+.round__repere{
+  font-family:'JetBrains Mono', monospace;
+}
+.round__numero{
+  font-family:'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  line-height: 0.8;
+  color: var(--sang);
+}
+.round__periode{
+  margin-top: var(--esp-1);
+  font-size: 0.8rem;
+  color: var(--acier);
+  letter-spacing: 0.05em;
+}
+.round__titre{
+  font-size: var(--taille-h3);
+  margin-bottom: var(--esp-2);
+}
+.round__texte{ max-width: 62ch; color: var(--acier); font-size: 1.02rem; }
+.round__texte p + p{ margin-top: var(--esp-2); }
+
+/* Bandeau "tale of the tape" : petites statistiques clés façon
+   fiche technique de combat, réutilisé dans chaque round quand
+   c'est pertinent. */
+.tale{
+  margin-top: var(--esp-3);
+  display:flex;
+  flex-wrap:wrap;
+  gap: var(--esp-3);
+}
+.tale__item{
+  border-left: 2px solid var(--sang);
+  padding-left: var(--esp-2);
+}
+.tale__label{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--acier);
+}
+.tale__valeur{
+  font-family:'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--encre);
+}
+
+@media (max-width: 700px){
+  .round{ grid-template-columns: 1fr; gap: var(--esp-2); }
+}
+
+/* ================================================================
+   7. TABLEAU DES CATÉGORIES DE POIDS ("TALE OF THE TAPE" GÉNÉRAL)
+   ================================================================ */
+.tableau-poids{
+  width:100%;
+  border-collapse: collapse;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  margin-top: var(--esp-4);
+}
+.tableau-poids caption{ text-align:left; margin-bottom: var(--esp-2); color: var(--acier); font-size: 0.75rem; }
+.tableau-poids th, .tableau-poids td{
+  text-align:left;
+  padding: 0.75em 1em;
+  border-bottom: 1px solid var(--ligne);
+}
+.tableau-poids thead th{
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: var(--acier);
+}
+.tableau-poids tbody tr:hover{ background: rgba(163,30,23,0.06); }
+
+/* ================================================================
+   8. GRILLE DES LÉGENDES (fiches combattants)
+   ================================================================ */
+.filtres{
+  display:flex;
+  flex-wrap:wrap;
+  gap: var(--esp-1);
+  margin-top: var(--esp-3);
+  margin-bottom: var(--esp-4);
+}
+.filtre{
+  background: transparent;
+  border: 1px solid var(--acier);
+  color: var(--encre);
+  padding: 0.5em 1.1em;
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.filtre.actif, .filtre:hover{
+  background: var(--sang);
+  border-color: var(--sang);
+  color: var(--papier);
+}
+
+.grille-legendes{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--esp-3);
+}
+.carte-combattant{
+  border: 1px solid var(--ligne);
+  padding: var(--esp-3);
+  background: var(--papier-sombre);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.carte-combattant:hover{
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 var(--encre);
+}
+.carte-combattant__ere{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sang);
+}
+.carte-combattant__nom{
+  font-family:'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  margin-top: 0.2em;
+}
+.carte-combattant__pays{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--acier);
+  margin-bottom: var(--esp-2);
+}
+.carte-combattant__fait{ font-size: 0.9rem; color: var(--acier); }
+
+/* Classe utilitaire pour masquer une carte filtrée (JS) */
+.masque{ display:none !important; }
+
+/* ================================================================
+   9. ORGANISATIONS
+   ================================================================ */
+.grille-orgas{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--ligne);
+  border: 1px solid var(--ligne);
+}
+.carte-orga{
+  background: var(--papier);
+  padding: var(--esp-3);
+}
+.carte-orga__nom{ 
+  font-family:'Bebas Neue', sans-serif; 
+  font-size: 1.5rem; 
+  color: var(--encre);
+}
+.carte-orga__meta{
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--sang);
+  margin: 0.3em 0 0.8em;
+}
+.carte-orga__texte{ font-size: 0.88rem; color: var(--acier); }
+
+/* ================================================================
+   10. PIED DE PAGE
+   ================================================================ */
+footer{
+  background: var(--encre);
+  color: var(--papier);
+  padding: var(--esp-4) 0;
+}
+.pied{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap: var(--esp-2);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: rgba(237,230,214,0.6);
+}
+.pied strong{ color: var(--papier); }
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAVIGATION FIXE
+     ================================================================ -->
+<nav class="nav">
+  <div class="nav__marque">MMA<span>/ HISTOIRE DU COMBAT</span></div>
+
+  <button class="nav__toggle" id="boutonMenu" aria-expanded="false" aria-controls="navLiens">Menu</button>
+
+  <ul class="nav__liens" id="navLiens">
+    <li><a href="#origines" data-section="origines">Origines</a></li>
+    <li><a href="#naissance" data-section="naissance">Naissance</a></li>
+    <li><a href="#regulation" data-section="regulation">Régulation</a></li>
+    <li><a href="#pride" data-section="pride">Âge d'or</a></li>
+    <li><a href="#explosion" data-section="explosion">Explosion</a></li>
+    <li><a href="#moderne" data-section="moderne">Ère moderne</a></li>
+    <li><a href="#legendes" data-section="legendes">Légendes</a></li>
+  </ul>
+
+  <!-- Badge mis à jour en JS pour indiquer dans quel "round"
+       (section) de l'histoire on se trouve pendant le scroll -->
+  <span class="compteur-round" id="compteurRound">ROUND 0 / 6</span>
+</nav>
+
+<!-- ================================================================
+     HERO
+     ================================================================ -->
+<header class="hero" id="haut">
+
+  <!-- Octogone décoratif en arrière-plan, dessiné en SVG pur -->
+  <svg class="hero__octogone" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="70,4 130,4 196,70 196,130 130,196 70,196 4,130 4,70"
+             fill="none" stroke="#17130F" stroke-width="0.6" opacity="0.5"/>
+    <polygon points="70,4 130,4 196,70 196,130 130,196 70,196 4,130 4,70"
+             fill="none" stroke="#A31E17" stroke-width="0.3"
+             transform="scale(0.8) translate(24,24)"/>
+  </svg>
+
+  <div class="hero__tampon">
+    PREMIÈRE TRACE<br>
+    -648 · PANKRATION<br>
+    JEUX OLYMPIQUES
+  </div>
+
+  <div class="hero__contenu">
+    <p class="oeillet">Archives du combat libre</p>
+    <h1>DE L'ARÈNE<br>À L'<em>OCTOGONE</em></h1>
+    <p class="hero__sous-titre">
+      L'histoire des arts martiaux mixtes : des pancratiastes de la
+      Grèce antique aux champions mondiaux d'aujourd'hui, retracée
+      round par round.
+    </p>
+    <div class="hero__actions">
+      <a class="bouton" href="#origines">Commencer le combat →</a>
+      <a class="lien-discret" href="#legendes">Voir les légendes</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll"><div class="barre"></div> DÉFILER</div>
+</header>
+
+<!-- ================================================================
+     INTRODUCTION
+     ================================================================ -->
+<section>
+  <div class="conteneur">
+    <div class="intro">
+      <p class="oeillet">Définition</p>
+      <h2 style="font-size:var(--taille-h2); margin-bottom: var(--esp-3);">Qu'est-ce que le MMA ?</h2>
+      <p>
+        Le MMA (Mixed Martial Arts, « arts martiaux mixtes ») est un
+        sport de combat qui autorise un large éventail de techniques
+        venues de disciplines différentes : percussion (boxe,
+        kickboxing, muay thaï), lutte (prise à deux jambes,
+        contrôle au sol) et soumission (jiu-jitsu brésilien, judo,
+        catch). Un combat peut se terminer par KO, soumission,
+        décision des juges ou arrêt de l'arbitre.
+      </p>
+      <p>
+        Ce n'est pas un sport né d'un coup en 1993 : il est l'héritier
+        de traditions de combat « toutes techniques » vieilles de
+        plusieurs siècles, formalisées progressivement en un sport de
+        compétition mondial. C'est cette histoire que cette page
+        raconte, round par round.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     ROUND 1 — ORIGINES
+     ================================================================ -->
+<section id="origines">
+  <div class="conteneur">
+    <p class="oeillet">Round 1</p>
+
+    <article class="round" data-round="1">
+      <div class="round__repere">
+        <div class="round__numero">01</div>
+        <div class="round__periode">-648 — 1980s</div>
+      </div>
+      <div>
+        <h3 class="round__titre">Les origines lointaines</h3>
+        <div class="round__texte">
+          <p>
+            Le principe d'un combat mêlant frappe et lutte n'a rien de
+            nouveau. Le <strong>pancrace</strong> (pankration), discipline
+            olympique de la Grèce antique, combinait pugilat et lutte
+            avec très peu d'interdits : seuls les coups de dents et les
+            attaques aux yeux étaient prohibés.
+          </p>
+          <p>
+            Au Brésil, au début du XX<sup>e</sup> siècle, l'arrivée du
+            judoka japonais Mitsuyo Maeda, qui enseigne son art à la
+            famille Gracie, donne naissance au jiu-jitsu brésilien et à
+            la tradition du <strong>Vale Tudo</strong> (« tout est permis
+            ») : des défis publics où des pratiquants de disciplines
+            différentes s'affrontaient sans catégories de poids ni
+            règles strictes.
+          </p>
+          <p>
+            En parallèle, la lutte de soumission occidentale (le
+            « catch » sous sa forme sportive d'origine) et divers
+            tournois « sans règles » organisés sporadiquement au Japon
+            et en Europe entretiennent, tout au long du siècle, l'idée
+            d'un affrontement entre styles.
+          </p>
+        </div>
+        <div class="tale">
+          <div class="tale__item">
+            <div class="tale__label">Pankration</div>
+            <div class="tale__valeur">-648, Jeux Olympiques</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Vale Tudo</div>
+            <div class="tale__valeur">Années 1920, Rio de Janeiro</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Principe</div>
+            <div class="tale__valeur">Affrontement entre styles</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============================================================
+         ROUND 2 — NAISSANCE DE L'UFC
+         ============================================================ -->
+    <article class="round" id="naissance" data-round="2">
+      <div class="round__repere">
+        <div class="round__numero">02</div>
+        <div class="round__periode">1993 — 2000</div>
+      </div>
+      <div>
+        <h3 class="round__titre">La naissance de l'UFC</h3>
+        <div class="round__texte">
+          <p>
+            En 1993, Rorion Gracie et l'entrepreneur Art Davie créent
+            l'<strong>Ultimate Fighting Championship</strong> (UFC) dans
+            le but explicite de démontrer, devant un large public
+            télévisé, la supériorité du jiu-jitsu brésilien face à
+            d'autres styles de combat.
+          </p>
+          <p>
+            L'UFC 1 se déroule le 12 novembre 1993 à Denver, sous forme
+            de tournoi à élimination directe, quasiment sans règles :
+            pas de catégories de poids, pas de limite de temps, très peu
+            de coups interdits. Le représentant du clan Gracie, Royce
+            Gracie, gabarit modeste face à des boxeurs, lutteurs et
+            karatékas bien plus lourds, remporte le tournoi grâce à sa
+            maîtrise du combat au sol.
+          </p>
+          <p>
+            Le succès est immédiat mais controversé : présenté par ses
+            détracteurs, dont le sénateur américain John McCain, comme
+            un « combat de coqs humain », le sport est retiré de
+            nombreux réseaux câblés et interdit dans plusieurs États
+            américains à la fin des années 1990.
+          </p>
+        </div>
+        <div class="tale">
+          <div class="tale__item">
+            <div class="tale__label">UFC 1</div>
+            <div class="tale__valeur">12 nov. 1993, Denver</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Vainqueur</div>
+            <div class="tale__valeur">Royce Gracie</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Format</div>
+            <div class="tale__valeur">Tournoi, quasi sans règles</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============================================================
+         ROUND 3 — RÉGULATION ET ZUFFA
+         ============================================================ -->
+    <article class="round" id="regulation" data-round="3">
+      <div class="round__repere">
+        <div class="round__numero">03</div>
+        <div class="round__periode">2000 — 2004</div>
+      </div>
+      <div>
+        <h3 class="round__titre">Régulation et rachat par Zuffa</h3>
+        <div class="round__texte">
+          <p>
+            Pour survivre, le sport doit se réformer. En 2000-2001, la
+            commission athlétique du New Jersey adopte les
+            <strong>« Unified Rules of Mixed Martial Arts »</strong> :
+            catégories de poids, rounds chronométrés, liste précise de
+            coups interdits (coups de tête, attaques à la nuque, petites
+            articulations, etc.) et présence obligatoire d'un arbitre.
+            Ce cadre deviendra la référence mondiale du sport.
+          </p>
+          <p>
+            En janvier 2001, alors que l'organisation est proche de la
+            faillite, les frères Frank et Lorenzo Fertitta ainsi que
+            Dana White rachètent l'UFC via leur société
+            <strong>Zuffa LLC</strong> pour environ 2 millions de
+            dollars. Commence alors un long travail de légitimation,
+            État par État, pour obtenir les licences nécessaires à
+            l'organisation d'événements aux États-Unis.
+          </p>
+        </div>
+        <div class="tale">
+          <div class="tale__item">
+            <div class="tale__label">Règles unifiées</div>
+            <div class="tale__valeur">2000-2001, New Jersey</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Rachat Zuffa</div>
+            <div class="tale__valeur">Janvier 2001, ≈ 2 M$</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============================================================
+         ROUND 4 — L'ÂGE D'OR JAPONAIS : PRIDE
+         ============================================================ -->
+    <article class="round" id="pride" data-round="4">
+      <div class="round__repere">
+        <div class="round__numero">04</div>
+        <div class="round__periode">1997 — 2007</div>
+      </div>
+      <div>
+        <h3 class="round__titre">L'âge d'or japonais : Pride FC</h3>
+        <div class="round__texte">
+          <p>
+            Pendant que l'UFC se bat pour sa survie aux États-Unis, le
+            MMA connaît un âge d'or au Japon avec le
+            <strong>Pride Fighting Championships</strong>, fondé en
+            1997. Les événements Pride remplissent le Tokyo Dome devant
+            des dizaines de milliers de spectateurs et révèlent des
+            stars mondiales : Fedor Emelianenko, invaincu pendant près
+            d'une décennie et considéré par beaucoup comme le meilleur
+            poids lourd de l'histoire du sport, mais aussi Wanderlei
+            Silva, Mirko « Cro Cop » Filipović ou Kazushi Sakuraba.
+          </p>
+          <p>
+            Fragilisée par des scandales et des difficultés
+            financières, l'organisation est rachetée par Zuffa en 2007
+            et cesse ses activités : plusieurs de ses plus grandes
+            stars rejoignent alors l'UFC, accélérant sa mondialisation.
+          </p>
+        </div>
+        <div class="tale">
+          <div class="tale__item">
+            <div class="tale__label">Fondation</div>
+            <div class="tale__valeur">1997, Japon</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Icône</div>
+            <div class="tale__valeur">Fedor Emelianenko</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Fin / rachat</div>
+            <div class="tale__valeur">2007, par Zuffa</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============================================================
+         ROUND 5 — EXPLOSION MAINSTREAM
+         ============================================================ -->
+    <article class="round" id="explosion" data-round="5">
+      <div class="round__repere">
+        <div class="round__numero">05</div>
+        <div class="round__periode">2005 — 2012</div>
+      </div>
+      <div>
+        <h3 class="round__titre">L'explosion mainstream</h3>
+        <div class="round__texte">
+          <p>
+            En 2005, l'UFC lance <strong>The Ultimate Fighter</strong>
+            (TUF), une téléréalité diffusée sur Spike TV qui suit des
+            combattants amateurs coachés par des stars de l'organisation.
+            La finale de la première saison, opposant Forrest Griffin à
+            Stephan Bonnar, est restée dans les mémoires comme le combat
+            qui a changé la perception du grand public américain sur ce
+            sport.
+          </p>
+          <p>
+            S'ensuit une décennie de croissance rapide : multiplication
+            des événements, expansion à l'international (Royaume-Uni,
+            Canada, Australie...), rachat de plusieurs organisations
+            concurrentes comme le WEC ou Strikeforce. De nouvelles
+            structures voient aussi le jour, comme
+            <strong>Bellator MMA</strong>, fondée en 2008.
+          </p>
+        </div>
+        <div class="tale">
+          <div class="tale__item">
+            <div class="tale__label">TUF, saison 1</div>
+            <div class="tale__valeur">2005</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Combat clé</div>
+            <div class="tale__valeur">Griffin vs Bonnar</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Bellator MMA</div>
+            <div class="tale__valeur">Fondée en 2008</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============================================================
+         ROUND 6 — ÈRE MODERNE
+         ============================================================ -->
+    <article class="round" id="moderne" data-round="6">
+      <div class="round__repere">
+        <div class="round__numero">06</div>
+        <div class="round__periode">2013 — aujourd'hui</div>
+      </div>
+      <div>
+        <h3 class="round__titre">L'ère moderne et mondiale</h3>
+        <div class="round__texte">
+          <p>
+            En 2013, <strong>Ronda Rousey</strong> devient la première
+            combattante signée par l'UFC, ouvrant la voie aux divisions
+            féminines et à une nouvelle génération de stars mondiales.
+            Des figures comme Conor McGregor, premier champion simultané
+            de deux catégories de poids en 2016, ou Khabib Nurmagomedov,
+            qui termine sa carrière invaincu, portent le sport vers une
+            audience toujours plus large.
+          </p>
+          <p>
+            En 2016, l'UFC est rachetée par le groupe WME-IMG pour
+            environ 4 milliards de dollars, confirmant sa place parmi
+            les plus grandes franchises sportives mondiales. Le paysage
+            se diversifie également avec la montée d'organisations
+            comme <strong>ONE Championship</strong> en Asie (fondée en
+            2011) ou le <strong>PFL</strong>, qui introduit un format
+            de saison régulière suivie de playoffs.
+          </p>
+          <p>
+            Aujourd'hui, le sport continue de se mondialiser, porté par
+            le streaming et par des champions comme Islam Makhachev,
+            Alex Pereira ou Amanda Nunes, double championne simultanée
+            considérée comme l'une des meilleures combattantes de
+            l'histoire du MMA féminin.
+          </p>
+        </div>
+        <div class="tale">
+          <div class="tale__item">
+            <div class="tale__label">Rousey à l'UFC</div>
+            <div class="tale__valeur">2013</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">Rachat WME-IMG</div>
+            <div class="tale__valeur">2016, ≈ 4 Md$</div>
+          </div>
+          <div class="tale__item">
+            <div class="tale__label">ONE Championship</div>
+            <div class="tale__valeur">Fondée en 2011</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     TABLEAU DES CATÉGORIES DE POIDS
+     ================================================================ -->
+<section class="section--sombre">
+  <div class="conteneur">
+    <p class="oeillet">Fiche technique</p>
+    <h2 style="font-size:var(--taille-h2); margin-bottom: var(--esp-2);">Les catégories de poids</h2>
+    <p style="max-width:60ch; color: rgba(237,230,214,0.7);">
+      Héritées des règles unifiées adoptées au début des années 2000,
+      les catégories de poids structurent aujourd'hui toutes les
+      grandes organisations de MMA.
+    </p>
+
+    <table class="tableau-poids" style="color:var(--papier);">
+      <caption>Catégories masculines/féminines (limites de poids en kg, arrondies)</caption>
+      <thead>
+        <tr><th>Catégorie</th><th>Limite</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Paille (catégorie uniquement féminine)</td><td>52,2 kg</td></tr>
+        <tr><td>Mouche</td><td>56,7 kg</td></tr>
+        <tr><td>Coq</td><td>61,2 kg</td></tr>
+        <tr><td>Plume</td><td>65,8 kg</td></tr>
+        <tr><td>Léger (catégorie uniquement masculine)</td><td>70,3 kg</td></tr>
+        <tr><td>Mi-moyen (catégorie uniquement masculine)</td><td>77,1 kg</td></tr>
+        <tr><td>Moyen (catégorie uniquement masculine)</td><td>83,9 kg</td></tr>
+        <tr><td>Mi-lourd (catégorie uniquement masculine)</td><td>93,0 kg</td></tr>
+        <tr><td>Lourd (catégorie uniquement masculine)</td><td>120,2 kg (maximum)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================================================================
+     LÉGENDES DU SPORT (grille filtrable en JS)
+     ================================================================ -->
+<section id="legendes">
+  <div class="conteneur">
+    <p class="oeillet">Carte des champions</p>
+    <h2 style="font-size:var(--taille-h2);">Les légendes du MMA</h2>
+
+    <!-- Boutons de filtre : chaque bouton porte un attribut
+         data-filtre qui correspond à la valeur data-ere des
+         cartes ci-dessous. Le JS s'en sert pour afficher/masquer. -->
+    <div class="filtres" role="group" aria-label="Filtrer les combattants par époque">
+      <button class="filtre actif" data-filtre="tous">Tous</button>
+      <button class="filtre" data-filtre="pionniers">Pionniers</button>
+      <button class="filtre" data-filtre="age-or">Âge d'or</button>
+      <button class="filtre" data-filtre="modernes">Modernes</button>
+      <button class="filtre" data-filtre="contemporains">Contemporains</button>
+    </div>
+
+    <div class="grille-legendes" id="grilleLegendes">
+
+      <article class="carte-combattant" data-ere="pionniers">
+        <div class="carte-combattant__ere">Pionnier</div>
+        <h3 class="carte-combattant__nom">Royce Gracie</h3>
+        <div class="carte-combattant__pays">Brésil</div>
+        <p class="carte-combattant__fait">Vainqueur du premier tournois UFC, il impose le jiu-jitsu brésilien face à des adversaires bien plus lourds.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="age-or">
+        <div class="carte-combattant__ere">Âge d'or</div>
+        <h3 class="carte-combattant__nom">Fedor Emelianenko</h3>
+        <div class="carte-combattant__pays">Russie</div>
+        <p class="carte-combattant__fait">Invaincu pendant près de dix ans en Pride, souvent cité comme le meilleur poids lourd de l'histoire du sport.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="age-or">
+        <div class="carte-combattant__ere">Âge d'or</div>
+        <h3 class="carte-combattant__nom">Chuck Liddell</h3>
+        <div class="carte-combattant__pays">États-Unis</div>
+        <p class="carte-combattant__fait">Champion mi-lourd charismatique, symbole de la percée grand public de l'UFC au milieu des années 2000.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="modernes">
+        <div class="carte-combattant__ere">Moderne</div>
+        <h3 class="carte-combattant__nom">Georges St-Pierre</h3>
+        <div class="carte-combattant__pays">Canada</div>
+        <p class="carte-combattant__fait">Double champion (mi-moyen puis moyen), référence absolue de polyvalence technique et de longévité.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="modernes">
+        <div class="carte-combattant__ere">Moderne</div>
+        <h3 class="carte-combattant__nom">Anderson Silva</h3>
+        <div class="carte-combattant__pays">Brésil</div>
+        <p class="carte-combattant__fait">Détient pendant longtemps le record de défenses consécutives du titre des poids moyens à l'UFC.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="modernes">
+        <div class="carte-combattant__ere">Moderne</div>
+        <h3 class="carte-combattant__nom">Ronda Rousey</h3>
+        <div class="carte-combattant__pays">États-Unis</div>
+        <p class="carte-combattant__fait">Première grande star mondiale du MMA féminin, elle ouvre la voie aux divisions femmes à l'UFC.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="modernes">
+        <div class="carte-combattant__ere">Moderne</div>
+        <h3 class="carte-combattant__nom">Demetrious Johnson</h3>
+        <div class="carte-combattant__pays">États-Unis</div>
+        <p class="carte-combattant__fait">Premier champion des poids mouches de l'ufc, une domination total de la catégorie, avec plus de 11 défenses de titre d'affilés (le record de défense à l'ufc).</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="modernes">
+        <div class="carte-combattant__ere">Moderne</div>
+        <h3 class="carte-combattant__nom">Jon Jones</h3>
+        <div class="carte-combattant__pays">États-Unis</div>
+        <p class="carte-combattant__fait">Le plus jeunes champions de l'histoire de l'UFC, il domine la catégorie des mi-lourds pendant de nombreuses années.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="modernes">
+        <div class="carte-combattant__ere">Moderne</div>
+        <h3 class="carte-combattant__nom">Conor McGregor</h3>
+        <div class="carte-combattant__pays">Irlande</div>
+        <p class="carte-combattant__fait">Premier combattant à détenir simultanément deux titres de champion dans deux catégories différentes à l'UFC.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="contemporains">
+        <div class="carte-combattant__ere">Contemporain</div>
+        <h3 class="carte-combattant__nom">Khabib Nurmagomedov</h3>
+        <div class="carte-combattant__pays">Russie</div>
+        <p class="carte-combattant__fait">Termine sa carrière invaincu, avec une domination au sol considérée comme parmi les plus complètes du sport.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="contemporains">
+        <div class="carte-combattant__ere">Contemporain</div>
+        <h3 class="carte-combattant__nom">Amanda Nunes</h3>
+        <div class="carte-combattant__pays">Brésil</div>
+        <p class="carte-combattant__fait">Championne simultanée dans deux catégories, régulièrement citée comme la meilleure combattante de l'histoire du MMA féminin.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="contemporains">
+        <div class="carte-combattant__ere">Contemporain</div>
+        <h3 class="carte-combattant__nom">Islam Makhachev</h3>
+        <div class="carte-combattant__pays">Russie</div>
+        <p class="carte-combattant__fait">Champion des poids légers, formé aux côtés de Khabib Nurmagomedov, il incarne la nouvelle génération de combattant complet.</p>
+      </article>
+
+      <article class="carte-combattant" data-ere="contemporains">
+        <div class="carte-combattant__ere">Contemporain</div>
+        <h3 class="carte-combattant__nom">Alex Pereira</h3>
+        <div class="carte-combattant__pays">Brésil</div>
+        <p class="carte-combattant__fait">Passé du kickboxing de haut niveau au MMA, il devient champion dans deux catégories de poids différentes à l'UFC.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     ORGANISATIONS
+     ================================================================ -->
+<section class="section--sombre">
+  <div class="conteneur">
+    <p class="oeillet">Les grandes organisations</p>
+    <h2 style="font-size:var(--taille-h2); margin-bottom: var(--esp-4);">Qui organise le MMA dans le monde ?</h2>
+
+    <div class="grille-orgas">
+      <div class="carte-orga">
+        <h3 class="carte-orga__nom">UFC</h3>
+        <div class="carte-orga__meta">1993 · États-Unis</div>
+        <p class="carte-orga__texte">La plus ancienne et la plus grande organisation mondiale, propriété du groupe TKO depuis les années 2020.</p>
+      </div>
+      <div class="carte-orga">
+        <h3 class="carte-orga__nom">Pride FC</h3>
+        <div class="carte-orga__meta">1997 – 2007 · Japon</div>
+        <p class="carte-orga__texte">Organisation historique aujourd'hui fermée, référence de l'âge d'or japonais du MMA.</p>
+      </div>
+      <div class="carte-orga">
+        <h3 class="carte-orga__nom">Bellator</h3>
+        <div class="carte-orga__meta">2008 · États-Unis</div>
+        <p class="carte-orga__texte">Longtemps principal concurrent américain de l'UFC, fusionné avec le PFL en 2023.</p>
+      </div>
+      <div class="carte-orga">
+        <h3 class="carte-orga__nom">ONE Championship</h3>
+        <div class="carte-orga__meta">2011 · Singapour</div>
+        <p class="carte-orga__texte">Principale organisation asiatique, mêlant MMA, kickboxing, muay thaï et grappling.</p>
+      </div>
+      <div class="carte-orga">
+        <h3 class="carte-orga__nom">PFL</h3>
+        <div class="carte-orga__meta">2018 · États-Unis</div>
+        <p class="carte-orga__texte">Introduit un format inédit de saison régulière suivie de playoffs, à la manière d'un sport collectif.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     PIED DE PAGE
+     ================================================================ -->
+<footer>
+  <div class="conteneur pied">
+    <span><strong>MMA / Histoire du combat</strong> — page éducative non officielle</span>
+    <span>Conçu comme un projet fan-made ·</span>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   JAVASCRIPT
+   ----------------------------------------------------------------
+   Trois responsabilités, chacune isolée dans sa propre fonction
+   pour rester lisible :
+   1) Menu mobile (ouverture/fermeture)
+   2) Navigation active + compteur "ROUND x/6" pendant le scroll
+   3) Révélation des sections "round" au scroll (IntersectionObserver)
+   4) Filtre de la grille des légendes par époque
+   ================================================================ */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* --------------------------------------------------------------
+     1) MENU MOBILE
+     On bascule une classe "ouvert" sur la liste de liens quand on
+     clique sur le bouton "Menu", et on ferme le menu automatiquement
+     dès qu'un lien est cliqué (pour ne pas rester bloqué en mobile).
+     -------------------------------------------------------------- */
+  var boutonMenu = document.getElementById('boutonMenu');
+  var navLiens = document.getElementById('navLiens');
+
+  boutonMenu.addEventListener('click', function () {
+    var estOuvert = navLiens.classList.toggle('ouvert');
+    boutonMenu.setAttribute('aria-expanded', estOuvert ? 'true' : 'false');
+  });
+
+  navLiens.querySelectorAll('a').forEach(function (lien) {
+    lien.addEventListener('click', function () {
+      navLiens.classList.remove('ouvert');
+      boutonMenu.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+
+  /* --------------------------------------------------------------
+     2) NAVIGATION ACTIVE + COMPTEUR DE ROUND
+     On observe toutes les sections identifiées par un id présent
+     dans la nav (origines, naissance, régulation, pride, explosion,
+     moderne, légendes). Dès qu'une section occupe une bonne partie
+     du centre de l'écran, on :
+       - met en surbrillance le lien correspondant dans la nav
+       - met à jour le badge "ROUND X / 6" (basé sur data-round de
+         l'article <round> le plus proche, ou sur l'ordre de la
+         section si ce n'est pas un round à proprement parler).
+     -------------------------------------------------------------- */
+  var liensNav = Array.prototype.slice.call(document.querySelectorAll('.nav__liens a'));
+  var compteurRound = document.getElementById('compteurRound');
+
+  // On construit la liste des sections cibles à partir des liens
+  // de nav (chacun pointe vers un id via son attribut href="#id").
+  var sectionsObservees = liensNav
+    .map(function (lien) {
+      var id = lien.getAttribute('href').replace('#', '');
+      var el = document.getElementById(id);
+      return el ? { id: id, el: el, lien: lien } : null;
+    })
+    .filter(Boolean);
+
+  var observateurNav = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (entree) {
+      if (entree.isIntersecting) {
+        var correspondance = sectionsObservees.find(function (s) { return s.el === entree.target; });
+        if (!correspondance) return;
+
+        // Retire "actif" de tous les liens puis l'ajoute au bon
+        liensNav.forEach(function (l) { l.classList.remove('actif'); });
+        correspondance.lien.classList.add('actif');
+
+        // Le round correspond à l'index de la section dans la nav
+        // (les 6 premières sections = rounds 1 à 6, "légendes" reste
+        // affiché comme round 6 puisqu'il conclut le récit).
+        var index = sectionsObservees.indexOf(correspondance) + 1;
+        var round = Math.min(index, 6);
+        compteurRound.textContent = 'ROUND ' + round + ' / 6';
+      }
+    });
+  }, {
+    // On déclenche le changement quand la section traverse le tiers
+    // supérieur de l'écran, pour un ressenti naturel au scroll.
+    rootMargin: '-20% 0px -70% 0px'
+  });
+
+  sectionsObservees.forEach(function (s) { observateurNav.observe(s.el); });
+
+
+  /* --------------------------------------------------------------
+     3) RÉVÉLATION DES "ROUNDS" AU SCROLL
+     Chaque bloc .round démarre invisible et légèrement décalé
+     (voir CSS). Dès qu'il entre dans le viewport, on lui ajoute la
+     classe .visible qui déclenche la transition CSS. On arrête
+     d'observer un round une fois révélé (pas besoin de le refaire).
+     -------------------------------------------------------------- */
+  var observateurReveal = new IntersectionObserver(function (entrees, observateur) {
+    entrees.forEach(function (entree) {
+      if (entree.isIntersecting) {
+        entree.target.classList.add('visible');
+        observateur.unobserve(entree.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.round').forEach(function (round) {
+    observateurReveal.observe(round);
+  });
+
+
+  /* --------------------------------------------------------------
+     4) FILTRE DE LA GRILLE DES LÉGENDES
+     Chaque bouton .filtre porte un attribut data-filtre. Chaque
+     carte .carte-combattant porte un attribut data-ere. On compare
+     les deux : si le filtre est "tous" ou correspond à l'époque de
+     la carte, on l'affiche, sinon on la masque via la classe
+     utilitaire .masque (display:none).
+     -------------------------------------------------------------- */
+  var boutonsFiltre = document.querySelectorAll('.filtre');
+  var cartesCombattants = document.querySelectorAll('.carte-combattant');
+
+  boutonsFiltre.forEach(function (bouton) {
+    bouton.addEventListener('click', function () {
+      var filtreChoisi = bouton.getAttribute('data-filtre');
+
+      // Mise à jour visuelle du bouton actif
+      boutonsFiltre.forEach(function (b) { b.classList.remove('actif'); });
+      bouton.classList.add('actif');
+
+      // Affichage / masquage des cartes selon le filtre choisi
+      cartesCombattants.forEach(function (carte) {
+        var correspond = (filtreChoisi === 'tous') || (carte.getAttribute('data-ere') === filtreChoisi);
+        carte.classList.toggle('masque', !correspond);
+      });
+    });
+  });
+
+});
+</script>
+
+</body>
+</html>

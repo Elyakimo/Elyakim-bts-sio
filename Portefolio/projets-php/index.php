@@ -104,61 +104,55 @@
         </div>
 </div>
     </section>
-      <h2>Ma formation en BTS SIO</h2>
- 
-      <div class="cards">
- 
-        <div class="card">
-          <h3>Cybersécurité</h3>
-          <p class="sous-titre">Apprendre les principes de la cybersécurité et protéger les systèmes.</p>
-          <div class="reveal">
-            <p>Analyse de vulnérabilités.</p>
-          </div>
-        </div>
- 
-        <div class="card">
-          <h3>Réseaux</h3>
-          <p class="sous-titre">Configurer et administrer un réseau.</p>
-          <div class="reveal">
-            <p>Routage, VLAN.</p>
-          </div>
-        </div>
- 
-        <div class="card">
-          <h3>Développement</h3>
-          <p class="sous-titre">Créer des applications et des logiciels.</p>
-          <div class="reveal">
-            <p>Front-end, back-end, bases de données.</p>
-          </div>
-        </div>
- 
-        <div class="card">
-          <h3>Gestion de projet</h3>
-          <p class="sous-titre">Planifier et gérer des projets informatiques.</p>
-          <div class="reveal">
-            <p>Méthodes agiles/Scrum.</p>
-          </div>
-        </div>
- 
-      </div>
- 
-      <h2>Mes compétences techniques</h2>
-      <div class="competence">
-        <h3>Programmation</h3>
-        <p>Python, HTML, CSS, SQL, PHP</p>
-      </div>
-      <div class="competence">
-        <h3>Réseaux</h3>
-        <p>Configuration et administration de réseaux</p>
-      </div class="competence">
-        <h3>Cybersécurité</h3>
-        <p>Principes de la cybersécurité et protection des systèmes informatiques</p>
-      </div>
+    <section>
+  <div class="outil-maitrise">
+    <div class="outil-title">Outils Maîtrisés</div>
+  <div class="outil-row">
+    <div class="outil">
+      <div class="logo-outil"><img src="linux_logo.png" alt="Linux"></div>
+      <div class="outil-name">Linux</div>
+    </div>
+    <div class="outil">
+      <div class="logo-outil"><img src="SQL_logo.png" alt="PostgreSQL / MySQL"></div>
+      <div class="outil-name">PostgreSQL/MySQL</div>
+    </div>
+    <div class="outil">
+      <div class="logo-outil"><img src="github_logo.png" alt="Git / GitHub"></div>
+      <div class="outil-name">Git/Github</div>
+    </div>
+    <div class="outil">
+      <div class="logo-outil"><img src="vscode_logo.png" alt="VS Code"></div>
+      <div class="outil-name">VsCode</div>
+    </div>
+    <div class="outil">
+      <div class="logo-outil"><img src="virtualbox_logo.webp" alt="Oracle VirtualBox"></div>
+      <div class="outil-name">OracleVirtualBox</div>
+    </div>
+    <div class="outil">
+      <div class="logo-outil"><img src="Wireshark_logo.png" alt="wireshark"></div>
+      <div class="outil-name">WireShark</div>
+  </div>
+</div>
+    </section>
     </main>
  
-    <footer>
-      <p>© 2026-2027 — Portfolio SIO d'Elyakim ONOCIA</p>
-    </footer>
+<footer>
+  <div class="footer-social">
+    <a href="https://github.com/Elyakimo" aria-label="Mon GitHub" target="_blank" rel="noopener">
+      <img src="github_logo.png" alt="GitHub">
+    </a>
+    <a href="https://www.linkedin.com/in/elyakim-onocia-0978a43b3/" aria-label="Mon LinkedIn" target="_blank" rel="noopener">
+      <img src="linkedin_logo.png" alt="LinkedIn">
+    </a>
+  </div>
+
+  <div class="footer-info">
+    <p>Tél : 80.57.62</p>
+    <p>Mail : eonocia@gmail.com</p>
+  </div>
+
+  <p class="footer-copy">© 2026-2027 — Portfolio SIO d'Elyakim ONOCIA</p>
+</footer>
  
   </body>
 </html>

@@ -40,6 +40,20 @@
 </body>
 
 <footer>
-  <p>© 2026-2027 — Portfolio SIO d'Elyakim ONOCIA</p>
+  <div class="footer-social">
+    <a href="https://github.com/Elyakimo" aria-label="Mon GitHub" target="_blank" rel="noopener">
+      <img src="github_logo.png" alt="GitHub">
+    </a>
+    <a href="https://www.linkedin.com/in/elyakim-onocia-0978a43b3/" aria-label="Mon LinkedIn" target="_blank" rel="noopener">
+      <img src="linkedin_logo.png" alt="LinkedIn">
+    </a>
+  </div>
+
+  <div class="footer-info">
+    <p>Tél : 80.57.62</p>
+    <p>Mail : eonocia@gmail.com</p>
+  </div>
+
+  <p class="footer-copy">© 2026-2027 — Portfolio SIO d'Elyakim ONOCIA</p>
 </footer>
 </html>

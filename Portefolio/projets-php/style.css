@@ -309,6 +309,7 @@ code {
 }
 .diplome-name{
   text-align: center;
+  color: #c084fc;
   padding: 1.2rem;
   font-family: var(--font-mono);
   font-weight: 900;
@@ -323,72 +324,153 @@ code {
   font-family: var(--font-mono);
   text-align: center;
   padding: 1.25rem;
+  color: #fbbf24;
+
 }
-
-
-
-
-
-
-.cards {
+.outil-maitrise{
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;        /* 12px */
-  max-width: 31.25rem; /* 500px */
-  width: 100%;
-  /* Correction (déjà appliquée précédemment) : width:500px fixe pouvait déborder sur un
-     écran de mobile plus étroit que 500px. max-width + width:100% s'adapte à l'écran. */
+  gap: 1.5rem;
+  padding-bottom: 5rem;
 }
 
-.card {
-  background: #f5f1e9;
-  border: 0.0625rem solid #d8d2c4; /* 1px — voir remarque bordures ci-dessous */
-  border-radius: 0.75rem; /* 12px */
-  padding: 1.25em 1.5em;  /* 20px 24px, en em : ce padding suit la taille du texte de la carte */
-  overflow: hidden;
-  cursor: default;
+.outil-title{
+  display: flex;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Jet Space', monospace;
+  font-size: clamp(1.5rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+  border-bottom: 1px solid var(--accent);
+  padding: 1.5rem;
 }
 
-.card h3 {
-  margin: 0 0 0.25em; /* 4px, en em : relatif à la taille du h3 (16px ici) */
-  font-size: 1rem; /* 16px */
+.outil-row{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 1.5rem;
+  padding-top: 3.5rem;
 }
 
-.card .sous-titre {
-  margin: 0;
-  color: #777;
-  font-size: 0.875rem; /* 14px */
-}
-
-/* Texte caché par défaut */
-.reveal {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
- margin-top: 0;
-}
-
-.reveal p {
-  margin: 0;
-  font-size: 0.8125rem; /* 13px */
-  color: #555;
-  line-height: 1.6; /* sans unité : un ratio, jamais en px/rem/em */
-}
-
-/* Révélation au survol */
-.card:hover .reveal {
-  max-height: 6.25rem; /* 100px */
-  opacity: 1;
-  margin-top: 0.75rem; /* 12px */
-}
-::-webkit-scrollbar{
-  background-color: var(--bg);
-  width: 6px;
-}
-::-webkit-scrollbar-thumb{
-  background-color: var(--border);
+.outil{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.5rem 1rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.outil:hover{
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
+.logo-outil{
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-outil img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.outil-name{
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem; 
+}
+footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 1.5rem 1.75rem;
+  text-align: center;
+}
+
+.footer-social{
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer-social a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.footer-social a:hover{
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.footer-social img{
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* Correction : le logo GitHub (noir sur transparent) est illisible sur fond sombre.
+   On l'inverse pour qu'il devienne blanc. Le logo LinkedIn est déjà coloré/lisible,
+   donc on ne cible QUE l'image github pour éviter de déformer les couleurs du logo LinkedIn. */
+.footer-social img:hover{
+  filter: invert(1);
+  transition: 0.2s;
+}
+
+.footer-info p{
+  margin: 0.15rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.footer-copy{
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  max-width: 24rem;
+}
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+::-webkit-scrollbar-track {
+  background:#fafcff00; 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: var(--radius);
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-soft);
+}
+
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg);
 }
 /* Sur petit écran, 4 cartes serrées sur une ligne deviendraient illisibles :
    on repasse en colonne, avec des connecteurs verticaux comme à l'origine */
