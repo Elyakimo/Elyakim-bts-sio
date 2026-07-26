@@ -45,6 +45,8 @@
       <br><br>
       <p class="hero-bio">Je cherche une alternance en développement pour l'année scolaire 2027-2028, si mon profil vous intéresse contactez-moi.</p>
 </div>
+
+
     <div class="hero-side">
       <div class="code-card">
         <div class="code-card-header">
@@ -102,7 +104,9 @@
             <p class="diplome-text">2026 - Je suis actuellement en 1ère année de BTS SIO option SLAM, je souhaiterais par la suite, après l'obtention de mon BTS m'orienter vers la cybersécurité.</p>
           </div>
         </div>
+        
 </div>
+
     </section>
     <section>
   <div class="outil-maitrise">

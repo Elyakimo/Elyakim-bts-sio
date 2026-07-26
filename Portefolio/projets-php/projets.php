@@ -28,15 +28,48 @@
     </header>
 
 
-  <h2>Mes projets</h2>
-      <article>
+ <section id="projets">
+  <h2 class="projets-h2">MES PROJETS</h2>
+
+  <div class="projects-grid">
+
+    <article class="projet">
+      <div class="projet-img">
+        <img src="Projet_Jeu.png" alt="Capture d'écran du jeu vidéo">
+      </div>
+      <div class="projet-body">
+        <div class="projet-tags">
+          <span class="tag">PYTHON</span>
+          <span class="tag">PYGAME</span>
+        </div>
         <h3>Projet de jeu vidéo</h3>
         <p>
           Développement d'un jeu vidéo en Python utilisant la bibliothèque Pygame. C'est un jeu en
           1 contre 1 où les joueurs incarnent soit Mario, soit Sonic.
         </p>
-        <div class="image"><img src="Projet_Jeu.png" alt="Capture d'écran du jeu vidéo" width="250"></div>
-      </article>
+      </div>
+    </article>
+
+    <article class="projet">
+      <div class="projet-img">
+        <img src="site_mma.png" alt="Capture du site MMA">
+      </div>
+      <div class="projet-body">
+        <div class="projet-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JAVASCRIPT</span>
+        </div>
+        <h3>Projet Site Web</h3>
+        <p>
+          Développement d'un site web en HTML/CSS et JavaScript sur le MMA, avec son histoire et
+          les grands champions de ce sport.
+        </p>
+      </div>
+    </article>
+
+  </div>
+</section>
 </body>
 
 <footer>

@@ -110,7 +110,7 @@ nav ul{
   gap: 0.25rem;
 }
 
-/* ===== CONTENU PRINCIPAL ===== */
+/* ===== CONTENU PRINCIPAL INDEX ===== */
 #accueil{
   position: relative;
   overflow: hidden;
@@ -257,6 +257,13 @@ code {
   color: #64748b;
   font-style: italic;
 }
+.hero-cta{
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
 .parcours {
   display: flex;
   flex-direction: column; 
@@ -391,6 +398,95 @@ code {
   font-weight: 700;
   font-size: 0.85rem; 
 }
+
+/*=====PROJETS=====*/
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1.8rem;
+}
+
+.projet {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden; 
+  transition: transform 0.2s, border-color 0.2s;
+}
+.projet:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
+.projet-img {
+  width: 100%;
+  height: 12rem;
+  overflow: hidden;
+}
+.projet-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block;
+}
+
+.projet-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.projet-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(61, 139, 255, 0.15);
+  color: var(--accent);
+}
+
+.projet h3 {
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.projet p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*=====FOOTER=====*/
 footer{
   display: flex;
   flex-direction: column;
