@@ -60,7 +60,7 @@
           <span class="tag">CSS</span>
           <span class="tag">JAVASCRIPT</span>
         </div>
-        <h3>Projet Site Web</h3>
+        <h3>Projet Site Web (Perso)</h3>
         <p>
           Développement d'un site web en HTML/CSS et JavaScript sur le MMA, avec son histoire et
           les grands champions de ce sport.
