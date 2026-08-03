@@ -71,6 +71,7 @@
                 <span class="c-string">"SQL"</span>, 
                 <span class="c-string">"PHP"</span>, 
                 <span class="c-string">"C"</span>, 
+                <span class="c-string">"Java"</span>,
             ] 
         <span class="c-keyword">def</span> <span class="c-fn">available</span>(self): 
             <span class="c-keyword">return</span> <span class="c-bool">True</span> <span class="c-comment"># stage/alternance</span>
@@ -135,7 +136,11 @@
     <div class="outil">
       <div class="logo-outil"><img src="Wireshark_logo.png" alt="wireshark"></div>
       <div class="outil-name">WireShark</div>
-  </div>
+    </div>
+    <div class="outil">
+      <div class="logo-outil"><img src="springboot-logo.png" alt="springboot"></div>
+      <div class="outil-name">Springboot</div>
+    </div>
 </div>
     </section>
     </main>

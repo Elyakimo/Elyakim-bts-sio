@@ -25,6 +25,23 @@
         </ul>
       </nav>
   </header>
+  <div class="contact-form">
+    <h1>Contactez-moi</h1>
+    <p>Vous pouvez me contacter en remplissant le formulaire ci-dessous :</p>
+  <form action="traitement.php" method="POST">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="email">Votre e-mail :</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message :</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button type="submit">Envoyer</button>
+</form>
+</div>
+
 
 </body>
 

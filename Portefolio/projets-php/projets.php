@@ -42,7 +42,7 @@
           <span class="tag">PYTHON</span>
           <span class="tag">PYGAME</span>
         </div>
-        <h3>Projet de jeu vidéo</h3>
+        <h3>Projet de jeu vidéo (En cours)</h3>
         <p>
           Développement d'un jeu vidéo en Python utilisant la bibliothèque Pygame. C'est un jeu en
           1 contre 1 où les joueurs incarnent soit Mario, soit Sonic.
@@ -67,6 +67,21 @@
         </p>
       </div>
     </article>
+    <article class="projet">
+      <div class="projet-img">
+        <img src="site-sio.png" alt="Capture du site SIO">
+      </div>
+      <div class="projet-body">
+        <div class="projet-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+        <h3>Site Web BTS SIO</h3>
+        <p>
+          Refonte complète du site web du BTS SIO en équipe de 2. Le site présente le BTS, la formation, le programme et les débouchées.
+        </p>
+      </div>
+    </article>    
 
   </div>
 </section>
