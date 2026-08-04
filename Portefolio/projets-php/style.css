@@ -399,6 +399,7 @@ code {
   font-size: 0.85rem; 
 }
 
+
 /*=====PROJETS=====*/
 
 .projets-h2{
@@ -488,14 +489,19 @@ code {
 .contact-form{
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   max-width: 600px;
-  padding: 0.2rem 1.5rem;
-  justify-content: center;
-  align-items: center;
-
+  margin: 0 auto;        /* centre tout le bloc sur la page */
+  padding: 3rem 1.5rem;  /* padding vertical généreux, au lieu de 0.2rem qui écrasait le haut */
 }
-.contact-form input,.contact-form textarea{
+
+.contact-form form{
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;           /* espace entre chaque paire label/champ */
+}
+
+.contact-form input, .contact-form textarea{
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid var(--border);
@@ -504,13 +510,14 @@ code {
   color: var(--ink);
   font-family: var(--font-mono);
   font-size: 0.9rem;
-  justify-content: center;
-  align-items: center;
 }
-.contact-form input:focus,.contact-form textarea:focus{
+
+.contact-form input:focus,
+.contact-form textarea:focus{
   outline: none;
   border-color: var(--accent);
 }
+
 .contact-form button{
   padding: 0.75rem 1.5rem;
   border: none;
@@ -520,42 +527,47 @@ code {
   font-family: var(--font-mono);
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: filter 0.2s;
   font-weight: bold;
 }
+
 .contact-form button:hover{
-  background: var(--accent-soft);
+  filter: brightness(1.15); /* le bouton s'éclaircit légèrement, reste plein et vif */
 }
+
 .contact-form textarea{
   resize: vertical;
   min-height: 120px;
 }
+
 .contact-form label{
   font-family: var(--font-mono);
   font-size: 0.9rem;
   color: var(--ink-soft);
   margin-bottom: 0.25rem;
   display: block;
-} 
+}
 
 .contact-form h1{
-  font-size: clamp(2.8rem,6vw,4.5rem);
-  position: relative;
-  top: 30px;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
   color: var(--ink);
   font-weight: 700;
-  margin-bottom: 60px;
+  margin: 0 0 0.5rem;
+  text-align: center;
   animation: fadeUp 0.6s ease both;
 }
+
 .contact-form p{
   font-family: var(--font-mono);
   font-size: 0.9rem;
   color: var(--ink-soft);
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   text-align: center;
+  animation: fadeUp 0.7s ease both;
 }
-
-
+.contact-form label, .contact-form input, .contact-form textarea, .contact-form button{
+  animation: fadeUp 0.8s ease both;
+}
 
 
 

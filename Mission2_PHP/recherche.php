@@ -13,7 +13,7 @@ $resultats = $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
 
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
         <meta charset="UTF8">
@@ -25,7 +25,7 @@ $resultats = $requete->fetchAll(PDO::FETCH_ASSOC);
         <form method="GET" action="recherche.php">
                 <label>Nom recherché :</label>
                 <input type="text" id="nom" name="nom" value="<?php echo htmlspecialchars($nomRecherche); ?>">
-		<button type = "submit>Rechercher</button>
+		<button type = "submit">Rechercher</button>
 	</form>
 	<p class="nav-link"><a href="liste.php">Retour à la liste</a></p>
 <?php if (!empty($nomRecherche)) { ?>

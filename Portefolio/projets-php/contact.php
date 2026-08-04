@@ -27,7 +27,7 @@
   </header>
   <div class="contact-form">
     <h1>Contactez-moi</h1>
-    <p>Vous pouvez me contacter en remplissant le formulaire ci-dessous :</p>
+    <p>Vous avez des questions ? Vous cherchez à collaborer ? Vous pouvez me contacter en remplissant le formulaire ci-dessous :</p>
   <form action="traitement.php" method="POST">
     <label for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" required>
