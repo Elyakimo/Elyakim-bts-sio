@@ -82,6 +82,20 @@
         </p>
       </div>
     </article>    
+    <article class="projet">
+      <div class="projet-img">
+        <img src="calculatrice.png" alt="Capture de la calculatrice">
+      </div>
+      <div class="projet-body">
+        <div class="projet-tags">
+          <span class="tag">C</span>
+        </div>
+        <h3>Calculatrice en C</h3>
+        <p>
+          Développement d'une calculatrice simple en langage C. Elle permet d'effectuer des opérations de base telles que l'addition, la soustraction, la multiplication et la division.
+        </p>
+      </div>
+    </article>
 
   </div>
 </section>
