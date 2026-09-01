@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Détail</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <main class="container">
+        <h1>Détail</h1>
+        <table>
+            <tr>
+                <th>Désignation</th>
+                <td th:text="${materiel.designation}"></td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td th:text="${materiel.categorie}"></td>
+            </tr>
+            <tr>
+                <th>État</th>
+                <td th:text="${materiel.etat}"></td>
+            </tr>
+            <tr>
+                <th>Disponibilité</th>
+                <td th:text="${materiel.disponible} ? 'Disponible' : 'Emprunté'"></td>
+            </tr>
+        </table>
+ 
+        
+        <p th:if="${param.error != null and param.error[0] == 'non_disponible'}" style="color:red;">
+            Ce matériel n'est pas disponible pour l'emprunt.
+        </p>
+ 
+        <form th:if="${materiel.disponible}" th:action="@{/materiels/{id}/emprunter(id=${materiel.id})}" method="post">
+            <button type="submit">Emprunter</button>
+        </form>
+ 
+        <form th:unless="${materiel.disponible}" th:action="@{/materiels/{id}/restituer(id=${materiel.id})}" method="post">
+            <button type="submit">Restituer</button>
+        </form>
+ 
+        <a th:href="@{/materiels}">Retour à la liste</a><a href="javascript:history.back()">Retour</a>
+    </main>
+</body>
+
+</html>

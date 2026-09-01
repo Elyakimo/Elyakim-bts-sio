@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <main class="container">
+        <h1>Ajouter</h1>       <form th:action="@{/materiels}" th:object="${materiel}" method="post">
+            <label>Désignation</label>
+            <input type="text" th:field="*{designation}" required>
+            <label>Catégorie</label>
+            <input type="text" th:field="*{categorie}" required>
+            <label>État</label>
+            <select th:field="*{etat}" required>
+                <option value="Bon">Bon</option>
+                <option value="Moyen">Moyen</option>
+                <option value="Défectueux">Défectueux</option>
+            </select>
+            <label>Disponible</label>
+            <button type="submit">Ajouter</button>
+        </form><a href="/materiels">Annuler</a>
+    </main>
+</body>
+
+</html>

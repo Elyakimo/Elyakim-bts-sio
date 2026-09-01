@@ -1,0 +1,4 @@
+#!/bin/sh
+if command -v mvn >/dev/null 2>&1; then exec mvn "$@"; fi
+echo "Maven n'est pas installé. Lancez la classe Application depuis l'IDE ou installez Maven." >&2
+exit 1

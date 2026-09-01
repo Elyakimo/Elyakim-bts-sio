@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+    <main class="container">
+        <h1>Liste</h1>
+        <a th:href="@{/materiels/nouveau}">Ajouter un matériel</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Désignation</th>
+                    <th>Catégorie</th>
+                    <th>Etat</th>
+                    <th>Disponibilité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="materiel : ${materiels}">
+                    <td th:text="${materiel.designation}"></td>
+                    <td th:text="${materiel.categorie}"></td>
+                    <td th:text="${materiel.etat}"></td>
+                    <td th:text="${materiel.disponible} ? 'Disponible' : 'Emprunté'"></td>
+                    <td>
+                        <a th:href="@{/materiels/{id}(id=${materiel.id})}">Consulter</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a th:href="@{/materiels}">Toutes les catégories</a>
+            <a th:href="@{/materiels(categorie='Informatique')}">Informatique</a>
+            <a th:href="@{/materiels(categorie='Bureautique')}">Bureautique</a>
+            <a th:href="@{/materiels(categorie='Audiovisuel')}">Audiovisuel</a>
+        </div>
+        <p>Cette page doit afficher les objets reçus du contrôleur.</p><a href="/">Accueil</a>
+    </main>
+</body>
+
+</html>
