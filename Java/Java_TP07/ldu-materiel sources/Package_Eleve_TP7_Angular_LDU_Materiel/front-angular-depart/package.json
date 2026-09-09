@@ -1,0 +1,23 @@
+{
+  "name": "ldu-materiel-angular",
+  "version": "1.0.0",
+  "scripts": {"start": "ng serve", "build": "ng build", "test": "ng test"},
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^22.1.5",
+    "@angular/compiler": "^22.1.5",
+    "@angular/core": "^22.1.5",
+    "@angular/forms": "^22.1.5",
+    "@angular/platform-browser": "^22.1.5",
+    "@angular/router": "^22.1.5",
+    "rxjs": "~7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "~0.16.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.1.7",
+    "@angular/cli": "^22.1.7",
+    "@angular/compiler-cli": "^22.1.5",
+    "typescript": "~6.0.2"
+  }
+}

@@ -1,0 +1,20 @@
+:root { font-family: Inter, system-ui, sans-serif; color: #17324d; background: #eef4f7; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, select { font: inherit; }
+.page { max-width: 1050px; margin: auto; padding: 2rem 1rem 4rem; }
+header { background: linear-gradient(120deg, #17324d, #1565c0); color: white; padding: 1.4rem; border-radius: 18px; margin-bottom: 1.2rem; }
+header h1 { margin: 0 0 .35rem; }
+.toolbar, .actions, form { display: flex; flex-wrap: wrap; gap: .7rem; align-items: end; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.card, .form-card { background: white; border-radius: 14px; padding: 1rem; box-shadow: 0 7px 20px #17324d18; }
+.badge { display: inline-block; padding: .25rem .55rem; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+.ouverte { background: #d9f4eb; color: #12614e; }
+.complete { background: #ffe0e4; color: #8b2331; }
+button { border: 0; border-radius: 8px; padding: .55rem .8rem; background: #1565c0; color: white; cursor: pointer; }
+button.secondary { background: #5c6975; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+label { display: grid; gap: .3rem; font-weight: 600; }
+input, select { border: 1px solid #b8c4ce; border-radius: 8px; padding: .55rem; }
+.message { background: #fff5cf; padding: .7rem; border-radius: 8px; }
+.error { background: #ffe0e4; color: #8b2331; padding: .7rem; border-radius: 8px; }

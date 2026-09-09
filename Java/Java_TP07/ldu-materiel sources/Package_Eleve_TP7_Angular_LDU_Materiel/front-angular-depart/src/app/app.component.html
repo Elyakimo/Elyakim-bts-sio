@@ -1,0 +1,39 @@
+<main class="page">
+    <header>
+        <h1>{{ titre }}</h1>
+        <h2>{{ sousTitre }}</h2>
+        <p>Le projet Angular fonctionne. À vous de construire l’interface.</p>
+        <p>{{ erreur }}</p>
+        <p>Nombre de matériels : {{ materiels.length }}</p>
+        <p>Nombre de matériels disponibles : {{ materiels.filter(m => m.disponible).length }}</p>
+    </header>
+             
+    @for (materiel of materiels; track materiel.id) {
+        <article class="card">
+            <h2>{{ materiel.designation }}</h2>
+            <p>Catégorie : {{ materiel.categorie }} - état : {{ materiel.etat }}</p>
+
+            @if (materiel.disponible) {
+                <span>DISPONIBLE</span>
+            } @else {
+                <span>EMPRUNTÉ</span>
+            }
+            <button (click)="afficherDesignation(materiel)">Afficher la désignation</button>
+        </article>
+        @if (message) {
+            <p>{{ message }}</p>
+        }
+        <button (click)="emprunter(materiel)" [disabled]="!materiel.disponible">Emprunter</button>
+        <button (click)="restituer(materiel)" [disabled]="materiel.disponible">Restituer</button>
+        <form (ngSubmit)="ajouter()">
+            <input name="designation" [(ngModel)]="nouveau.designation" required>
+            <input name="categorie" [(ngModel)]="nouveau.categorie" required>
+            <select name="etat" [(ngModel)]="nouveau.etat">
+                <option value="bon">Bon</option>
+                <option value="moyen">Moyen</option>
+                <option value="mauvais">A réparer</option>
+            </select>
+            <button type="submit">Ajouter</button>
+        </form>
+    }
+</main>
