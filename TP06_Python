@@ -1,5 +1,0 @@
-age_utilisateur= int(input("Quel est votre âge?: "))
-if age_utilisateur>=18:
-    print("Vous êtes majeur")
-else:
-    print("Vous êtes mineur")

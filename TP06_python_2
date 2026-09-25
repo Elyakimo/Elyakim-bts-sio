@@ -1,7 +1,0 @@
-nombre = int(input("Choisi un nombre : "))
-if nombre>0:
-    print("le nombre choisi est positif")
-elif nombre==0:
-    print("le nombre choisi est égale à zéro")
-else:
-    print("le nombre choisi est négatif")

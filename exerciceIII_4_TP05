@@ -1,7 +1,0 @@
-x = float(input("Nombre 1 : "))
-y = float(input("Nobre 2 : "))
-print ((x+y)/2)
-cfp = float(input("Montant en cfp : "))
-print (cfp/119.3)
-
-

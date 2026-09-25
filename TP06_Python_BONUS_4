@@ -1,4 +1,0 @@
-def valid_mdp(mdp):
-    if len(mdp)<12:
-        print("mot de passe trop faible")
-    elif mdp.isdigit()

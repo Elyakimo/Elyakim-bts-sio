@@ -19,9 +19,6 @@ async function basculerEtat() {
 
 <template>
   <div class="max-w-sm rounded overflow-hidden shadow-lg p-4">
-    <button @click="filtre = 'tous'">Tous</button>
-    <button @click="filtre = 'disponible'">Disponibles</button>
-    <button @click="filtre = 'emprunte'">Empruntés</button>
     <h1 class="font-bold text-xl mb-2">{{ materiel.designation }}</h1>
     <p class="text-gray-700 text-base mb-2">
       {{ materiel.categorie }}

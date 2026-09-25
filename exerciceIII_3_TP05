@@ -1,2 +1,0 @@
-prout = input("nombre: " )
-print(prout)

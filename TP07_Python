@@ -1,5 +1,0 @@
-def notes_valides(liste_notes):
-    for i in liste_notes:
-        if i>=10:
-            print(i)
-notes_valides([10, 12, 14, 12, 1, 3 ,4 ,9])

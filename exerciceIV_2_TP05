@@ -1,3 +1,0 @@
-def saluer(nom):
-    print("salut",nom)
-saluer("Daniel")

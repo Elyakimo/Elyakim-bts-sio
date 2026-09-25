@@ -1,6 +1,0 @@
-mot_de_passe = input("Veuillez saisir le mot de passe : ")
-mot_de_passe_a_saisir = "pYth0n123*%?"
-if mot_de_passe==mot_de_passe_a_saisir:
-    print("Accès autorisé")
-else:
-    print("Accès refusé")

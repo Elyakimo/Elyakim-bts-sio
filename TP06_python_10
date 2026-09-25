@@ -1,9 +1,0 @@
-def connexion(login, mdp):
-    mot_de_passe="!!_Ca_C_pYthon_**"
-    identifiant= "root"
-    if login == identifiant and mdp == mot_de_passe:
-        print("Connexion réussi")
-    else:
-        print("Identifiant incorrect ou Mot de passe incorrect")
-connexion("root", "!!p**")
-    

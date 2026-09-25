@@ -37,3 +37,6 @@ export async function restituer(id){
             return null
         })
 }
+export async function ajouterMateriel(){
+    return fetch(`/api/materiels`)
+}

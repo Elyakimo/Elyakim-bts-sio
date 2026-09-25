@@ -1,6 +1,0 @@
-def verifier_majorite(age):
-    if age>=18:
-        print("Majeur")
-    else:
-        print("mineur")
-verifier_majorite(17)
